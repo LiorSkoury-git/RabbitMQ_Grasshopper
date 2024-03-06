@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\RabbitMQ.Core",
-    "\\RabbitMQ.Core\\RabbitMQ.Core"
+    "\\RabbitMQ.Core\\RabbitMQ.Core",
+    "\\RabbitMQ.GH",
+    "\\RabbitMQ.GH\\RabbitMQ.GH"
   ],
-  "SelectedNode": "\\RabbitMQ.Core\\RabbitMQ.Core\\Connection.cs",
+  "SelectedNode": "\\RabbitMQ.Core\\RabbitMQ.Core",
   "PreviewInSolutionExplorer": false
 }
