@@ -44,6 +44,14 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// </summary>
         private int counter;
 
+        /// <summary>
+        /// Represents a RabbitMQ consumer.
+        /// </summary>
+        public Consumer()
+          : base("Consumer", "Consumer",
+            "A consumer rabbitMQ object",
+            "RabbitMQ", "General")
+
         #endregion Fields
 
         #region Constructor

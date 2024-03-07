@@ -4,8 +4,9 @@
     "\\RabbitMQ.Core",
     "\\RabbitMQ.Core\\RabbitMQ.Core",
     "\\RabbitMQ.GH",
-    "\\RabbitMQ.GH\\RabbitMQ.GH"
+    "\\RabbitMQ.GH\\RabbitMQ.GH",
+    "\\RabbitMQ.GH\\RabbitMQ.GH\\Consumer_Producer"
   ],
-  "SelectedNode": "\\RabbitMQ.Core\\RabbitMQ.Core",
+  "SelectedNode": "\\RabbitMQ.Core\\RabbitMQ.Core\\Handler.cs",
   "PreviewInSolutionExplorer": false
 }
