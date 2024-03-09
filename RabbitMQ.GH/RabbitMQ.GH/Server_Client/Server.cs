@@ -245,8 +245,8 @@ namespace RabbitMQ.GH.Server_Client
         {
             // Represents the state of the component. true if it is activated false otherwise.
             bool b = false;
+            
             // RabbitMQ state variables.
-
             string host = null;
             int port = 5672;
             string queue = "";
