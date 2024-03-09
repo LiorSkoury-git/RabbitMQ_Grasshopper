@@ -249,7 +249,9 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
+            // Represents the state of the component. true if it is activated false otherwise.
             bool b = false;
+            // RabbitMQ state variables.
             string host = null;
             int port = 5672;
             string queue = "";
@@ -260,6 +262,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             handler = new Handler();
             string vHost = null;
 
+            // Get data from the component´s inputs
             DA.GetData("Run", ref b);
             DA.GetData("Host", ref host);
             DA.GetData("Port", ref port);
