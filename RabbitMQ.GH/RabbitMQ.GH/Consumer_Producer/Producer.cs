@@ -203,6 +203,8 @@ namespace RabbitMQ.GH.Consumer_Producer
             }
         }
 
+        #endregion Methods
+
         /// <summary>
         /// Provides an Icon for the component.
         /// </summary>
@@ -224,6 +226,5 @@ namespace RabbitMQ.GH.Consumer_Producer
         {
             get { return new Guid("16A42FBF-F5CD-4F0E-B154-8F6FB31D5B50"); }
         }
-        #endregion Methods
     }
 }

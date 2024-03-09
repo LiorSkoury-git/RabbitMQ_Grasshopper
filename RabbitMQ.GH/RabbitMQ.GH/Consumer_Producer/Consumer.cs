@@ -288,6 +288,8 @@ namespace RabbitMQ.GH.Consumer_Producer
             DA.SetDataList("Received", lastReceivedMessage);
 
         }
+        
+        #endregion Methods
 
         /// <summary>
         /// Provides an Icon for every component that will be visible in the User Interface.
@@ -312,6 +314,5 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// </summary>
         public override Guid ComponentGuid => new Guid("656192ec-5cc8-43ee-8b8d-09970a8597c9");
 
-        #endregion Methods
     }
 }
