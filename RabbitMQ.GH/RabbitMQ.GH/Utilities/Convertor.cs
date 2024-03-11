@@ -10,27 +10,41 @@ using System.Threading.Tasks;
 
 namespace RabbitMQ.GH.Utilities
 {
+    /// <summary>
+    /// Represents a class to handle data conversion between different formats.
+    /// </summary>
     public static class Convertor
     {
+        #region Methods
 
+        /// <summary>
+        /// Serializes a list of grasshopper objects and sets them up in a Json object.
+        /// </summary>
+        /// <param name="objectWrappers"> Wrappers with the objects to convert.</param>
+        /// <param errors="port">[Out] Errors raised during conversion.</param>
         public static List<string> ConvertToStrings(List<GH_ObjectWrapper> objectWrappers, out List<string> errors)
         {
             List<string> jsons = new List<string>();
             errors = new List<string>();
             var jsonOptions = new SerializationOptions();
             int counter = 0;
+
             foreach (var wrapper in objectWrappers)
             {
                 var objectType = wrapper.Value.GetType();
                 var t = wrapper.Value.GetType().ToString();
                 string so = null;
+
                 Rhino.RhinoApp.WriteLine(wrapper.Value.GetType().ToString());
+
+                // Converts base geometry objects.
                 if (wrapper.Value is GeometryBase ghGeometry)
                 {
                     GeometryBase geometry = ghGeometry;
                     t = geometry.GetType().ToString();
                     so = geometry.ToJSON(jsonOptions);
                 }
+                // Converts point objects.
                 else if (objectType == typeof(GH_Point))
                 {
                     GH_Point ghPoint = wrapper.Value as GH_Point;
@@ -38,6 +52,7 @@ namespace RabbitMQ.GH.Utilities
                     t = point.GetType().ToString();
                     so = point.ToString();
                 }
+                // Converts vector objects.
                 else if (objectType == typeof(GH_Vector))
                 {
                     GH_Vector ghVector = wrapper.Value as GH_Vector;
@@ -45,6 +60,7 @@ namespace RabbitMQ.GH.Utilities
                     t = vector.GetType().ToString();
                     so = vector.ToString();
                 }
+                // Converts plane objects.
                 else if (objectType == typeof(GH_Plane))
                 {
                     GH_Plane ghPlane = wrapper.Value as GH_Plane;
@@ -52,6 +68,7 @@ namespace RabbitMQ.GH.Utilities
                     t = plane.GetType().ToString();
                     so = plane.ToString();
                 }
+                // Converts transform objects.
                 else if (objectType == typeof(GH_Transform))
                 {
                     GH_Transform ghTrans = wrapper.Value as GH_Transform;
@@ -59,41 +76,48 @@ namespace RabbitMQ.GH.Utilities
                     t = trans.GetType().ToString();
                     so = trans.ToString();
                 }
+                // Converts line objects.
                 else if (wrapper.Value is GH_Line ghLine)
                 {
                     Line line = ghLine.Value;
                     t = line.GetType().ToString();
                     so = line.ToString();
                 }
+                // Converts curve objects.
                 else if (wrapper.Value is GH_Curve ghCurve)
                 {
                     Curve curve = ghCurve.Value;
                     t = curve.GetType().ToString();
                     so = curve.ToJSON(jsonOptions);
                 }
+                // Converts surface objects.
                 else if (wrapper.Value is GH_Surface ghSurface)
                 {
                     Brep surface = ghSurface.Value;
                     t = surface.GetType().ToString();
                     so = surface.ToJSON(jsonOptions);
                 }
+                // Converts brep objects.
                 else if (wrapper.Value is GH_Brep ghBrep)
                 {
                     Brep brep = ghBrep.Value;
                     t = brep.GetType().ToString();
                     so = brep.ToJSON(jsonOptions);
                 }
+                // Converts mesh objects.
                 else if (wrapper.Value is GH_Mesh ghMesh)
                 {
                     Rhino.Geometry.Mesh mesh = ghMesh.Value;
                     t = mesh.GetType().ToString();
                     so = mesh.ToJSON(jsonOptions);
                 }
+                // Sets up the error message to use for invalid objects.
                 else
                 {
                     t = $"Input object number {counter} is not a rhino type or it is not supported";
                 }
 
+                // Serializes the converted and adds them to the jsons list.
                 if (so != null)
                 {
                     Dictionary<string, string> data = new Dictionary<string, string> { { t, so } };
@@ -102,6 +126,7 @@ namespace RabbitMQ.GH.Utilities
 
                     jsons.Add(jsonObj);
                 }
+                // Adds the error mesasge to the errors list.
                 else
                 {
                     errors.Add(t);
@@ -112,6 +137,11 @@ namespace RabbitMQ.GH.Utilities
             return jsons;
         }
 
+        /// <summary>
+        /// Converts a list of String objects to their corresponding Rhinoceros type.
+        /// </summary>
+        /// <param name="stringObjects"> Objects to convert.</param>
+        /// <param errors="port">[Out] Errors raised during conversion.</param>
         public static List<object> ConvertToRhino(List<string> stringObjects, out List<string> errors)
         {
             List<object> objects = new List<object>();
@@ -120,6 +150,8 @@ namespace RabbitMQ.GH.Utilities
             for (int i = 0; i < stringObjects.Count; i++)
             {
                 Dictionary<String, String> data = null;
+
+                // Deserializes an object.
                 try
                 {
                     data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<String, String>>(stringObjects[i]);
@@ -130,20 +162,23 @@ namespace RabbitMQ.GH.Utilities
                     continue;
                 }
                 string[] keys = data.Keys.ToArray();
+
+                // Converts base geometry objects.
                 try
                 {
-
                     var o = GeometryBase.FromJSON(data[keys[0]]);
                     objects.Add(o);
                 }
                 catch
                 {
+                    // Converts point objects.
                     if (keys[0].Contains("Point"))
                     {
                         var o = Point3d.Unset;
                         Point3d.TryParse(data[keys[0]], out o);
                         objects.Add(o);
                     }
+                    // Converts vector objects.
                     else if (keys[0].Contains("Vector"))
                     {
                         var temp = Point3d.Unset;
@@ -151,6 +186,7 @@ namespace RabbitMQ.GH.Utilities
                         var o = new Vector3d(temp);
                         objects.Add(o);
                     }
+                    // Converts plane objects.
                     else if (keys[0].Contains("Plane"))
                     {
                         string[] parts = data[keys[0]].Split(' ');
@@ -167,6 +203,7 @@ namespace RabbitMQ.GH.Utilities
                         var o = new Plane(origin, vectors[0], vectors[1]);
                         objects.Add(o);
                     }
+                    // Converts line objects.
                     else if (keys[0].Contains("Line"))
                     {
                         string[] parts = data[keys[0]].Split(',');
@@ -175,6 +212,7 @@ namespace RabbitMQ.GH.Utilities
                         var o = new Line(p1, p2);
                         objects.Add(o);
                     }
+                    // Converts transform objects.
                     else if (keys[0].Contains("Transform"))
                     {
                         var numbers = data[keys[0]].Split(new[] { '=', '(', ')', ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -190,6 +228,7 @@ namespace RabbitMQ.GH.Utilities
                         objects.Add(transform);
 
                     }
+                    // Handles invalid-formated data.
                     else
                     {
                         errors.Add("Invalid format in input number - " + i.ToString());
@@ -200,13 +239,17 @@ namespace RabbitMQ.GH.Utilities
             return objects;
         }
 
+        /// <summary>
+        /// Serializes the list of objects to JSON.
+        /// </summary>
+        /// <param name="list"> List of bjects to serialize.</param>
         public static string ConvertListToJson<T>(List<T> list)
         {
-            // Serialize the list of objects to JSON
             string json = JsonConvert.SerializeObject(list);
             return json;
-
         }
+        
+        #endregion Methods
 
     }
 }
