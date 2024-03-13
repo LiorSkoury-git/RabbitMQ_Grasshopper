@@ -15,10 +15,15 @@ using static Rhino.FileIO.FileObjWriteOptions;
 
 namespace RabbitMQ.GH.Utilities
 {
+    /// <summary>
+    /// Represents a Rhino-to-String object converter component inheriting from the GH_component class.
+    /// </summary>
     public class RhinoToString : GH_Component
     {
+        #region Constructor
+
         /// <summary>
-        /// Initializes a new instance of the MyComponent1 class.
+        /// Default constructor. Invokes the base class constructor.
         /// </summary>
         public RhinoToString()
           : base("RhinoToString", "RTS",
@@ -27,7 +32,17 @@ namespace RabbitMQ.GH.Utilities
         {
         }
 
+        #endregion Constructor
+
+        /// <summary>
+        /// Represents the exposure level of the component.
+        /// </summary>
+        /// <value>
+        /// The value of 4 sets the Consumer component to be displayed in the second section of the Grasshopper toolbar.
+        /// </value>
         public override GH_Exposure Exposure => (GH_Exposure)4;
+
+        #region Methods
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -52,19 +67,21 @@ namespace RabbitMQ.GH.Utilities
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-
+            // Reads the input data and returns early if unsuccessful.
             List<GH_ObjectWrapper> objectWrappers = new List<GH_ObjectWrapper>();
             if (!DA.GetDataList("Objects", objectWrappers)) return;
 
+            // Stores converted objects and conversion errors.
             List<string> errors = new List<string>();
             List<string> jsons = Convertor.ConvertToStrings(objectWrappers, out errors);
 
+            // Outputs the converted objects.
             DA.SetDataList("JsonString", jsons);
             DA.SetDataList("Errors", errors);
 
         }
 
-        
+        #endregion Methods
 
         /// <summary>
         /// Provides an Icon for the component.
