@@ -7,10 +7,17 @@ using Rhino.Geometry;
 
 namespace RabbitMQ.GH.Utilities
 {
+    /// <summary>
+    /// Represents a class to handle authentication credentials within grasshopper.
+    /// Inherits from the GH_component class.
+    /// </summary>
     public class Credentials : GH_Component
     {
+
+        #region Constructor
+
         /// <summary>
-        /// Initializes a new instance of the MyComponent1 class.
+        /// Default constructor. Invokes the base class constructor.
         /// </summary>
         public Credentials()
           : base("Credentials", "Cred",
@@ -18,8 +25,18 @@ namespace RabbitMQ.GH.Utilities
               "RabbitMQ", "Utilities")
         {
         }
+        
+        #endregion Constructor
 
+        /// <summary>
+        /// Represents the exposure level of the component.
+        /// </summary>
+        /// /// <value>
+        /// The value of 2 sets the Consumer component to be displayed in the first section of the Grasshopper toolbar.
+        /// </value>
         public override GH_Exposure Exposure => (GH_Exposure)2;
+
+        #region Methods
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -93,25 +110,32 @@ namespace RabbitMQ.GH.Utilities
         {
             get { return new Guid("3E7DE11C-2D30-4AFE-AF85-9DC2BA4D50EB"); }
         }
+
+        #endregion methods
     }
 
+    /// <summary>
+    /// Represents a user interface to input credentials for authentication.
+    /// Inherits from the Form class.
+    /// </summary>
     public class LoginForm : Form
     {
         // Public properties to access the user input data from the component
         public string Username { get; private set; }
         public string Password { get; private set; }
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public LoginForm()
         {
-
-
-            // Set up the form properties
+            // Sets up the form properties
             Text = "RabbitMQ Credentials";
             Width = 400;
             Height = 200;
             // Form initialization and controls setup as before...
 
-            // Load the logo image from file
+            // Loads the logo image from file
             //string logoFilePath = DesFab.GH.Properties.Resources.DesFab1; // Replace with the path to your logo image
             //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(logoFilePath);
             System.Drawing.Bitmap bmp = Resources.BASIC;
@@ -120,7 +144,7 @@ namespace RabbitMQ.GH.Utilities
             // Set the logo as the form's icon
             //this.Icon = new System.Drawing.Icon(logoFilePath);
 
-            // Create the controls for username and password input
+            // Creates the controls for username and password input
             Label usernameLabel = new Label()
             {
                 Text = "Username:",
@@ -174,38 +198,44 @@ namespace RabbitMQ.GH.Utilities
                 Username = usernameTextBox.Text;
                 Password = passwordTextBox.Text;
 
-                // Close the form with a result indicating the "OK" button was clicked
+                // Closes the form with a result indicating the "OK" button was clicked
                 DialogResult = DialogResult.OK;
                 Close();
             };
         }
     }
 
+    /// <summary>
+    /// Represents a user interface to logout from the RabbitMQ server.
+    /// Inherits from the Form class.
+    /// </summary>
     public class LogoutForm : Form
     {
         // Public properties to access the user input data from the component
         public bool Log_out { get; private set; }
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public LogoutForm()
         {
 
-            // Set up the form properties
+            // Sets up the form properties
             Text = "RabbitMQ Credentials";
             Width = 400;
             Height = 200;
             // Form initialization and controls setup as before...
 
-            // Load the logo image from file
+            // Loads the logo image from file
             //string logoFilePath = DesFab.GH.Properties.Resources.DesFab1; // Replace with the path to your logo image
             //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(logoFilePath);
             System.Drawing.Bitmap bmp = Resources.BASIC;
             this.Icon = System.Drawing.Icon.FromHandle(bmp.GetHicon());
 
-            // Set the logo as the form's icon
+            // Sets the logo as the form's icon
             //this.Icon = new System.Drawing.Icon(logoFilePath);
 
-            // Create the controls for username and password input
-
+            // Creates the controls for username and password input
             Label usernameLabel = new Label()
             {
                 Text = "You are logged in as " + Rhino.RhinoDoc.ActiveDoc.RuntimeData["RabbitMQ_USER"],
@@ -213,6 +243,7 @@ namespace RabbitMQ.GH.Utilities
                 Top = 20,
                 Width = 220
             };
+
 
             Button logout = new Button()
             {
@@ -230,12 +261,12 @@ namespace RabbitMQ.GH.Utilities
                 Width = 100
             };
 
-            // Add the controls to the form
+            // Adds the controls to the form
             Controls.Add(usernameLabel);
             Controls.Add(logout);
             Controls.Add(confirm);
 
-            // Attach the button's click event handler
+            // Attaches the logout button's click event handler
             logout.Click += (sender, e) =>
             {
                 // Access the user's input data here
@@ -245,6 +276,7 @@ namespace RabbitMQ.GH.Utilities
                 Close();
             };
 
+            // Attaches the confirmation button's click event handler
             confirm.Click += (sender, e) =>
             {
                 // Access the user's input data here
@@ -257,7 +289,5 @@ namespace RabbitMQ.GH.Utilities
 
         }
     }
-
-
 
 }
