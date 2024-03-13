@@ -8,10 +8,16 @@ using Rhino.Geometry;
 
 namespace RabbitMQ.GH.Utilities
 {
+    /// <summary>
+    /// Represents a String-to-Rhino objects converter component inheriting from the GH_component class.
+    /// </summary>
     public class StringToRhino : GH_Component
     {
+        #region Constructor
+
         /// <summary>
-        /// Initializes a new instance of the MyComponent1 class.
+        /// Default constructor. Invokes the base class constructor and then extends it by initializing the
+        /// lastReceivedMessage, timerStarted, messageSent, and currentMessage fields.
         /// </summary>
         public StringToRhino()
           : base("StringToRhino", "STR",
@@ -20,7 +26,17 @@ namespace RabbitMQ.GH.Utilities
         {
         }
 
+        #endregion Constructor
+
+        /// <summary>
+        /// Represents the exposure level of the component.
+        /// </summary>
+        /// /// <value>
+        /// The value of 4 sets the Consumer component to be displayed in the second section of the Grasshopper toolbar.
+        /// </value>
         public override GH_Exposure Exposure => (GH_Exposure)4;
+
+        #region Methods
 
         /// <summary>
         /// Registers all the input parameters for this component.
@@ -44,16 +60,21 @@ namespace RabbitMQ.GH.Utilities
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
-        {
+        {   
+            // Reads the input data and returns early if unsuccessful.
             List<string> objectWrappers = new List<string>();
             if (!DA.GetDataList("sObjects", objectWrappers)) return;
 
+            // Stores converted objects and conversion errors.
             List<string> errors = new List<string>();
             List<object> jsons = Convertor.ConvertToRhino(objectWrappers, out errors);
 
+            // Outuputs the converted objects.
             DA.SetDataList("Objects", jsons);
             DA.SetDataList("Errors", errors);
         }
+
+        #endregion Methods
 
         /// <summary>
         /// Provides an Icon for the component.
