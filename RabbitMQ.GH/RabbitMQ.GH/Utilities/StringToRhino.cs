@@ -9,15 +9,14 @@ using Rhino.Geometry;
 namespace RabbitMQ.GH.Utilities
 {
     /// <summary>
-    /// Represents a String-to-Rhino objects converter component inheriting from the GH_component class.
+    /// Represents a String-to-Rhino object converter component inheriting from the GH_component class.
     /// </summary>
     public class StringToRhino : GH_Component
     {
         #region Constructor
 
         /// <summary>
-        /// Default constructor. Invokes the base class constructor and then extends it by initializing the
-        /// lastReceivedMessage, timerStarted, messageSent, and currentMessage fields.
+        /// Default constructor. Invokes the base class constructor.
         /// </summary>
         public StringToRhino()
           : base("StringToRhino", "STR",
@@ -31,7 +30,7 @@ namespace RabbitMQ.GH.Utilities
         /// <summary>
         /// Represents the exposure level of the component.
         /// </summary>
-        /// /// <value>
+        /// <value>
         /// The value of 4 sets the Consumer component to be displayed in the second section of the Grasshopper toolbar.
         /// </value>
         public override GH_Exposure Exposure => (GH_Exposure)4;
@@ -69,7 +68,7 @@ namespace RabbitMQ.GH.Utilities
             List<string> errors = new List<string>();
             List<object> jsons = Convertor.ConvertToRhino(objectWrappers, out errors);
 
-            // Outuputs the converted objects.
+            // Outputs the converted objects.
             DA.SetDataList("Objects", jsons);
             DA.SetDataList("Errors", errors);
         }
