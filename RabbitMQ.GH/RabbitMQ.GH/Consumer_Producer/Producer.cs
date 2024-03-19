@@ -43,7 +43,7 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// <summary>
         /// Represents the exposure level of the component.
         /// </summary>
-        /// /// <value>
+        /// <value>
         /// The value of 2 sets the Consumer component to be displayed in the first section of the Grasshopper toolbar.
         /// </value>
         public override GH_Exposure Exposure => (GH_Exposure)2;
@@ -84,7 +84,7 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// <param name="queue">Queue name.</param>
         /// <param name="exchange">Exchange name.</param>
         /// <param name="exType">Exchange type.</param>
-        /// <param name="routingKey">Rouiting key assigned to the message.</param>
+        /// <param name="routingKey">Routing key assigned to the message.</param>
         /// <param name="message">Message to send.</param>
         private void sendMessage(string queue, string exchange, int exType, string routingKey, string message)
         {
@@ -102,7 +102,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             // Encodes the message.
             var encodeMessage = Encoding.UTF8.GetBytes(message);
 
-            // Sends the message and confirm to the user.
+            // Sends the message and confirms to the user.
             connection.channel.BasicPublish(exchange: exchange, routingKey: routingKey, null, encodeMessage);
             Rhino.RhinoApp.WriteLine("Message was sent");
         }
@@ -142,7 +142,7 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {   
-            // Represents the state of the component. true if it is activated false otherwise.
+            // Represents the state of the component. true if it is activated, false otherwise.
             bool b = false;
             // RabbitMQ state variables.
             string host = null;
@@ -178,7 +178,7 @@ namespace RabbitMQ.GH.Consumer_Producer
                         // Sets the routing key to the default value.
                         routingKey = routingKeys[routingKeys.Count - 1];
                         // If there is another element in routingKeys besides the default value,
-                        // Sets the routing key to the value corresponding to the message.
+                        // sets the routing key to the value corresponding to the message.
                         if (i < routingKeys.Count - 1)
                         {
                             routingKey = routingKeys[i];
@@ -214,7 +214,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             {
 
                 return Resources.PRO2; 
-                //You can add image files to your project resources and access them like this:
+                // You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
             }
         }

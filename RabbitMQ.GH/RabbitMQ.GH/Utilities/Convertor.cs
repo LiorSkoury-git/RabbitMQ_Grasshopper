@@ -117,7 +117,7 @@ namespace RabbitMQ.GH.Utilities
                     t = $"Input object number {counter} is not a rhino type or it is not supported";
                 }
 
-                // Serializes the converted and adds them to the jsons list.
+                // Serializes the converted objects and adds them to the jsons list.
                 if (so != null)
                 {
                     Dictionary<string, string> data = new Dictionary<string, string> { { t, so } };
@@ -242,7 +242,7 @@ namespace RabbitMQ.GH.Utilities
         /// <summary>
         /// Serializes the list of objects to JSON.
         /// </summary>
-        /// <param name="list"> List of bjects to serialize.</param>
+        /// <param name="list"> List of objects to serialize.</param>
         public static string ConvertListToJson<T>(List<T> list)
         {
             string json = JsonConvert.SerializeObject(list);

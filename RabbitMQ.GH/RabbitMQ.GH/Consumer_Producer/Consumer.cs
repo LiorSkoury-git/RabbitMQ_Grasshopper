@@ -25,7 +25,7 @@ namespace RabbitMQ.GH.Consumer_Producer
         private bool timerStarted;
 
         /// <summary>
-        /// Represents the last received messages.
+        /// Represents the last received message.
         /// </summary>
         private List<object> lastReceivedMessage;
 
@@ -175,7 +175,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             }
             catch (Exception ex)
             {   
-                //Error handling.
+                // Error handling.
                 RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
                 // Recomputes the component´s solution to keep consuming messages.
                 ExpireSolution(true);
@@ -224,7 +224,7 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Represents the state of the component. true if it is activated false otherwise.
+            // Represents the state of the component. true if it is activated, false otherwise.
             bool b = false;
             // RabbitMQ state variables.
             string host = null;
@@ -262,7 +262,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             {
                 if (timerStarted)
                 {
-                    connection.closeConnection(); // Close the connection setup if not done yet
+                    connection.closeConnection(); // Close the connection setup if not done yet.
                     lastReceivedMessage = new List<object>() { "Turn on the Run to start consuming" };
                     timerStarted = false;
                 }

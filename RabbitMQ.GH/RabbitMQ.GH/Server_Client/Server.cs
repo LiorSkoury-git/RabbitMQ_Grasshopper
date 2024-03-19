@@ -163,7 +163,7 @@ namespace RabbitMQ.GH.Server_Client
                 // Gets the message body decoded as String.
                 var body = Encoding.UTF8.GetString(ea.Body.ToArray());
                 var result = handler.HandleMessage(body);
-                // Encode as bytes the result of handling the received message, and send it as a response.
+                // Encodes as bytes the result of handling the received message, and send it as a response.
                 var message = Utilities.Convertor.ConvertListToJson(result);
                 var encodedMessage = Encoding.UTF8.GetBytes(message);
                 connection.channel.BasicPublish("", ea.BasicProperties.ReplyTo, null, encodedMessage);
@@ -176,7 +176,7 @@ namespace RabbitMQ.GH.Server_Client
             }
             catch (Exception ex)
             {
-                //Error handling.
+                // Error handling.
                 RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
                 // Recomputes the component´s solution to keep consuming messages.
                 ExpireSolution(true);
@@ -225,7 +225,7 @@ namespace RabbitMQ.GH.Server_Client
         /// to store data in output parameters.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Represents the state of the component. true if it is activated false otherwise.
+            // Represents the state of the component. true if it is activated, false otherwise.
             bool b = false;
             
             // RabbitMQ state variables.
@@ -283,7 +283,7 @@ namespace RabbitMQ.GH.Server_Client
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
+                // You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
                 return Resources.SER;
             }

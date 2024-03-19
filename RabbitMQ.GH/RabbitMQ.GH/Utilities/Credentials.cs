@@ -89,8 +89,8 @@ namespace RabbitMQ.GH.Utilities
             string username = form.Username;
             string password = form.Password;
 
-            /// Adds the username to RuntimeData, a property accessible from the document´s scope. 
-            /// This makes the credentials available outside the  input component.
+            /// Adds the credentials to RuntimeData, a property accessible from the document´s scope. 
+            /// This makes them available outside the input component.
             Rhino.RhinoDoc.ActiveDoc.RuntimeData["RabbitMQ_USER"] = username;
             Rhino.RhinoDoc.ActiveDoc.RuntimeData["RabbitMQ_PASS"] = password;
         }
@@ -102,7 +102,7 @@ namespace RabbitMQ.GH.Utilities
         {
             get
             {
-                //You can add image files to your project resources and access them like this:
+                // You can add image files to your project resources and access them like this:
                 // return Resources.IconForThisComponent;
                 return Resources.CER;
             }
@@ -125,7 +125,7 @@ namespace RabbitMQ.GH.Utilities
     /// </summary>
     public class LoginForm : Form
     {
-        // Public properties to access the user input data from the component
+        // Public properties to access the user input data from the component.
         public string Username { get; private set; }
         public string Password { get; private set; }
 
@@ -140,16 +140,16 @@ namespace RabbitMQ.GH.Utilities
             Height = 200;
             // Form initialization and controls setup as before...
 
-            // Loads the logo image from file
-            //string logoFilePath = DesFab.GH.Properties.Resources.DesFab1; // Replace with the path to your logo image
-            //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(logoFilePath);
+            // Loads the logo image from file.
+            // string logoFilePath = DesFab.GH.Properties.Resources.DesFab1; // Replace with the path to your logo image
+            // System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(logoFilePath);
             System.Drawing.Bitmap bmp = Resources.BASIC;
             this.Icon = System.Drawing.Icon.FromHandle(bmp.GetHicon());
 
-            // Set the logo as the form's icon
+            // Set the logo as the form's icon.
             //this.Icon = new System.Drawing.Icon(logoFilePath);
 
-            // Creates the controls for username and password input
+            // Creates the controls for username and password input.
             Label usernameLabel = new Label()
             {
                 Text = "Username:",
@@ -178,7 +178,7 @@ namespace RabbitMQ.GH.Utilities
                 Left = 120,
                 Top = 50,
                 Width = 200,
-                PasswordChar = '*' // Show asterisks for password input
+                PasswordChar = '*' // Show asterisks for password input.
             };
 
             Button button = new Button()
@@ -189,21 +189,21 @@ namespace RabbitMQ.GH.Utilities
                 Width = 100
             };
 
-            // Add the controls to the form
+            // Adds the controls to the form.
             Controls.Add(usernameLabel);
             Controls.Add(usernameTextBox);
             Controls.Add(passwordLabel);
             Controls.Add(passwordTextBox);
             Controls.Add(button);
 
-            // Attach the button's click event handler
+            // Attaches the button's click event handler.
             button.Click += (sender, e) =>
             {
-                // Access the user's input data here
+                // Access the user's input data here.
                 Username = usernameTextBox.Text;
                 Password = passwordTextBox.Text;
 
-                // Closes the form with a result indicating the "OK" button was clicked
+                // Closes the form with a result indicating the "OK" button was clicked.
                 DialogResult = DialogResult.OK;
                 Close();
             };
@@ -225,13 +225,13 @@ namespace RabbitMQ.GH.Utilities
         public LogoutForm()
         {
 
-            // Sets up the form properties
+            // Sets up the form properties.
             Text = "RabbitMQ Credentials";
             Width = 400;
             Height = 200;
             // Form initialization and controls setup as before...
 
-            // Loads the logo image from file
+            // Loads the logo image from file.
             //string logoFilePath = DesFab.GH.Properties.Resources.DesFab1; // Replace with the path to your logo image
             //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(logoFilePath);
             System.Drawing.Bitmap bmp = Resources.BASIC;
@@ -266,27 +266,27 @@ namespace RabbitMQ.GH.Utilities
                 Width = 100
             };
 
-            // Adds the controls to the form
+            // Adds the controls to the form.
             Controls.Add(usernameLabel);
             Controls.Add(logout);
             Controls.Add(confirm);
 
-            // Attaches the logout button's click event handler
+            // Attaches the logout button's click event handler.
             logout.Click += (sender, e) =>
             {
-                // Access the user's input data here
+                // Access the user's input data here.
                 Log_out = true;
-                // Close the form with a result indicating the "OK" button was clicked
+                // Closes the form with a result indicating the "OK" button was clicked.
                 DialogResult = DialogResult.OK;
                 Close();
             };
 
-            // Attaches the confirmation button's click event handler
+            // Attaches the confirmation button's click event handler.
             confirm.Click += (sender, e) =>
             {
-                // Access the user's input data here
+                // Access the user's input data here.
                 Log_out = false;
-                // Close the form with a result indicating the "OK" button was clicked
+                // Close the form with a result indicating the "OK" button was clicked.
                 DialogResult = DialogResult.OK;
                 Close();
             };

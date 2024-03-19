@@ -11,7 +11,7 @@ using RabbitMQ.Client.Events;
 namespace RabbitMQ.Core
 {
     /// <summary>
-    /// Represents a connection to a RabbitMQ seerver. 
+    /// Represents a connection to a RabbitMQ server. 
     /// </summary>
     public class Connection
     {
@@ -116,7 +116,7 @@ namespace RabbitMQ.Core
         }
 
         /// <summary>
-        /// Sets up a RabbitMQ queue associated to chanel.
+        /// Sets up a RabbitMQ queue associated to channel.
         /// </summary>
         /// <param name="QueueName">Queue name (default is "").</param>
         /// <param name="Exclusive">Declares if the queue is exclusive to connection (default is false).</param>
@@ -138,7 +138,7 @@ namespace RabbitMQ.Core
             if (competing==true)
             {
                 /// Sets up limitations so at most one message (prefetchCount: 1) of unlimited size (prefetchSize: 0) 
-                /// will be delivered by the server. This settings only apply to a client, and not to the channe (global: false).
+                /// will be delivered by the server. This settings only apply to a client, and not to the channel (global: false).
                 this.channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
             }
             this.queues.Add(queue);
@@ -148,7 +148,7 @@ namespace RabbitMQ.Core
         /// Sets up a RabbitMQ Exchange.
         /// </summary>
         /// <param name="ExchangeName">Exchange name (default is "").</param>
-        /// <param name="ExType">Sets the exchange type (default is 0, meaning a fanout exchange).</param>
+        /// <param name="ExType">Exchange type (default is 0, representing a fanout exchange).</param>
         public void setExchange(string ExchangeName, int ExType=0)
         {
             if (ExType == 0) { channel.ExchangeDeclare(exchange: ExchangeName, type: ExchangeType.Fanout);}
@@ -158,7 +158,7 @@ namespace RabbitMQ.Core
         }
 
         /// <summary>
-        /// Sets up a binding the exchange and the first queue in queues.
+        /// Sets up a binding between the exchange and the first queue in queues.
         /// </summary>
         /// <param name="RoutingKeys">List of routing keys to use for the binding.</param>
         public void setBinding(List<string> RoutingKeys)
@@ -170,7 +170,7 @@ namespace RabbitMQ.Core
         }
 
         /// <summary>
-        /// Sets up a binding the exchange and a specified queue from queues.
+        /// Sets up a binding between the exchange and a specified queue from queues.
         /// </summary>
         /// <param name="QueueName">Name of the queue to bind.</param>
         /// <param name="ExchangeName">Name of the exchange to bind.</param>
@@ -184,7 +184,7 @@ namespace RabbitMQ.Core
         }
 
         /// <summary>
-        /// Set a consumer to start consuming messages from the first queue in queues.
+        /// Sets a consumer to start consuming messages from the first queue in queues.
         /// </summary>
         /// <param name="consumer">The consumer to activate.</param>
         public void startConsuming(EventingBasicConsumer consumer)

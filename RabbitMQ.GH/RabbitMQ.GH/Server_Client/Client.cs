@@ -136,12 +136,12 @@ namespace RabbitMQ.GH.Server_Client
             // Sets an exclusive queue for server replies.
             var replyQueue = connection.channel.QueueDeclare("", exclusive: true);
 
-            // Sets a consumer for server replies, subscribe it to the Received event and start consuming.
+            // Sets a consumer for server replies, subscribes it to the Received event and starts consuming.
             replyConsumer = new EventingBasicConsumer(connection.channel);
             replyConsumer.Received += HandleReceivedMessage;
             connection.channel.BasicConsume(queue: replyQueue.QueueName, autoAck: false, consumer: replyConsumer);
 
-            // Sets the reply queue and an Global unique id to relate the sent message with its corresponding reply.
+            // Sets the reply queue and a global unique id to relate the sent message with its corresponding reply.
             var properties = connection.channel.CreateBasicProperties();
             properties.ReplyTo = replyQueue.QueueName;
             properties.CorrelationId = Guid.NewGuid().ToString();
@@ -178,10 +178,10 @@ namespace RabbitMQ.GH.Server_Client
             }
             catch (Exception ex)
             {
-                //Error handling.
+                // Error handling.
                 RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
                 // Recomputes the component´s solution to keep consuming messages.
-                //ExpireSolution(true);
+                // ExpireSolution(true);
             }
 
             // Cancels the queue used for server replies.
@@ -225,7 +225,7 @@ namespace RabbitMQ.GH.Server_Client
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            // Represents the state of the component. true if it is activated false otherwise.
+            // Represents the state of the component. true if it is activated, false otherwise.
             bool b = false;
 
             // RabbitMQ state variables.
@@ -267,12 +267,12 @@ namespace RabbitMQ.GH.Server_Client
                 {
                     try
                     {
-                        connection.closeConnection(); // Close the connection setup if not done yet
+                        connection.closeConnection(); // Close the connection setup if not done yet.
                     }
                     catch { RhinoApp.WriteLine("The connection is closed"); }
 
 
-                    // Update state variables.
+                    // Updates state variables.
                     lastReceivedMessage = new List<object>() { "Turn on the Run to start consuming" };
                     timerStarted = false;
                     messageSent = false;
