@@ -80,12 +80,17 @@ namespace RabbitMQ.GH.Utilities
                 }
             }
 
+            // Declares and shows a window for the user to input the login credentials.
             LoginForm form = new LoginForm();
             form.ShowDialog();
 
+            /// Reads the credentials from form and stores the user´s username and password
+            /// into the corresponding variables.
             string username = form.Username;
             string password = form.Password;
 
+            /// Adds the username to RuntimeData, a property accessible from the document´s scope. 
+            /// This makes the credentials available outside the  input component.
             Rhino.RhinoDoc.ActiveDoc.RuntimeData["RabbitMQ_USER"] = username;
             Rhino.RhinoDoc.ActiveDoc.RuntimeData["RabbitMQ_PASS"] = password;
         }
