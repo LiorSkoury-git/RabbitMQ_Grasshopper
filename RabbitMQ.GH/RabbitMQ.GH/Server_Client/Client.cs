@@ -178,7 +178,7 @@ namespace RabbitMQ.GH.Server_Client
             catch (Exception ex)
             {
                 //Error handling.
-                RhinoApp.WriteLine($"Exception in HandleMessageReceived: {ex.Message}");
+                RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
                 //ExpireSolution(true);
             }
 

@@ -156,25 +156,6 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// </summary>
         /// <param name="sender">Sender of the message.</param>
         /// <param name="ea">Deliver event arguments.</param>
-        private void HandleMessageReceived(object sender, BasicDeliverEventArgs ea)
-        {
-            // Acknowledges the message.
-            connection.channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-            // Gets the message body decoded as String.
-            byte[] body = ea.Body.ToArray();
-            var data = Encoding.UTF8.GetString(body);
-            // Handles the message's data.
-            var result = handler.HandleMessage(data);
-            // Updates lastReceivedMessage.
-            lastReceivedMessage = result;
-            ExpireSolution(true);
-        }
-
-        /// <summary>
-        /// Handles a newly received message.
-        /// </summary>
-        /// <param name="sender">Sender of the message.</param>
-        /// <param name="ea">Deliver event arguments.</param>
         private void HandleReceivedMessage(object sender, BasicDeliverEventArgs ea)
         {
             try
@@ -194,7 +175,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             catch (Exception ex)
             {   
                 //Error handling.
-                RhinoApp.WriteLine($"Exception in HandleMessageReceived: {ex.Message}");
+                RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
                 ExpireSolution(true);
             }
 
