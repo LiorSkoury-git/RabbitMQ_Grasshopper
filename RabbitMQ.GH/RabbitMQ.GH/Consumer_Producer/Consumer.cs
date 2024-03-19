@@ -170,12 +170,14 @@ namespace RabbitMQ.GH.Consumer_Producer
                 lastReceivedMessage = result;
                 counter++;
                 RhinoApp.WriteLine("Message handled successfully.");
+                // Recomputes the component´s solution to keep consuming messages.
                 ExpireSolution(true);
             }
             catch (Exception ex)
             {   
                 //Error handling.
                 RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
+                // Recomputes the component´s solution to keep consuming messages.
                 ExpireSolution(true);
             }
 
