@@ -122,6 +122,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             pManager.AddTextParameter("RoutingKeys", "RK", "Routing keys as list", GH_ParamAccess.list);
             pManager.AddTextParameter("vHost", "VH", "Virtual host if needed", GH_ParamAccess.item);
 
+            pManager[2].Optional = true;
             pManager[4].Optional = true;
             pManager[5].Optional = true;
             pManager[6].Optional = true;

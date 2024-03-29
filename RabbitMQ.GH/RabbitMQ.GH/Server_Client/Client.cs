@@ -203,7 +203,7 @@ namespace RabbitMQ.GH.Server_Client
             pManager.AddGenericParameter("Handler", "Ha", "Handler object to do somthing with the reply data", GH_ParamAccess.item);
             pManager.AddTextParameter("vHost", "VH", "Virtual host if needed", GH_ParamAccess.item);
 
-
+            pManager[2].Optional = true;
             pManager[5].Optional = true;
             pManager[6].Optional = true;
             pManager[7].Optional = true;

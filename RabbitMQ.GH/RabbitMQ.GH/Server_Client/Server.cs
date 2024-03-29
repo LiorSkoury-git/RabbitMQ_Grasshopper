@@ -200,6 +200,7 @@ namespace RabbitMQ.GH.Server_Client
             pManager.AddGenericParameter("Handler", "Ha", "Handler object to do somthing with the income data", GH_ParamAccess.item);
             pManager.AddTextParameter("vHost", "VH", "Virtual host if needed", GH_ParamAccess.item);
 
+            pManager[2].Optional = true;
             pManager[3].Optional = true;
             pManager[4].Optional = true;
             pManager[5].Optional = true;
