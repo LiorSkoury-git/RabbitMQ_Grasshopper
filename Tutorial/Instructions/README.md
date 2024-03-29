@@ -26,6 +26,8 @@ If the plugins are not working properly, follow the same procedure described in 
 ### Management plugin activation
 To activate the management plugin,open a termial window and go to the installation directory. After that, run the ```rabbitmq-plugins enable rabbitmq_management``` command. This should enable the plugion and it should be working the next time RabbitMQ is launched. The same command works for activating other plugins by replacing *rabbitmq_management* by the plugin's name after it has been downloaded into the plugins directory located on RabbitMQ's installation directory.
 
+For further information, visit this [link](https://youtube.com/playlist?list=PLalrWAGybpB-UHbRDhFsBgXJM1g6T4IvO&si=324s3u0WqtVukrIl)
+
 ### Grashopper plugin installation
 Download the [plugin files](Add_link_to_files) and copy them in your grasshopper component folder. If you don´t know the location of this folder on your computer, you can fin it out in grasshoppers interface. Go to *File>Special Folders>Components Folder* and a file explorer window will open in the correct directory.
 
