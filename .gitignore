@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Tutorial/Examples/Basic_consumer/Consumer_C#/obj
+/Tutorial/Examples/Basic_consumer/Consumer_C#/bin/Debug/net8.0
+/Tutorial/Examples/Basic_consumer/Producer_C#/bin/Debug/net8.0
+/Tutorial/Examples/Basic_consumer/Producer_C#/obj
+/Tutorial/Examples/Basic_consumer/Basic consumer.sln
+/Tutorial/Examples/Competing_consumers/Consumer_C#/bin/Debug/net8.0
+/Tutorial/Examples/Competing_consumers/Consumer_C#/obj
+/Tutorial/Examples/Competing_consumers/Producer_C#/bin/Debug/net8.0
+/Tutorial/Examples/Competing_consumers/Producer_C#/obj
+/d
+/RabbitMQ.GH/.vs/RabbitMQ.GH
+/RabbitMQ.GH/RabbitMQ.GH/bin/Release/net48
