@@ -102,8 +102,6 @@ namespace RabbitMQ.GH.Utilities
         {
             get
             {
-                // You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
                 return Resources.CER;
             }
         }
@@ -141,13 +139,9 @@ namespace RabbitMQ.GH.Utilities
             // Form initialization and controls setup as before...
 
             // Loads the logo image from file.
-            // string logoFilePath = DesFab.GH.Properties.Resources.DesFab1; // Replace with the path to your logo image
-            // System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(logoFilePath);
             System.Drawing.Bitmap bmp = Resources.BASIC;
             this.Icon = System.Drawing.Icon.FromHandle(bmp.GetHicon());
 
-            // Set the logo as the form's icon.
-            //this.Icon = new System.Drawing.Icon(logoFilePath);
 
             // Creates the controls for username and password input.
             Label usernameLabel = new Label()
@@ -232,13 +226,9 @@ namespace RabbitMQ.GH.Utilities
             // Form initialization and controls setup as before...
 
             // Loads the logo image from file.
-            //string logoFilePath = DesFab.GH.Properties.Resources.DesFab1; // Replace with the path to your logo image
-            //System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(logoFilePath);
             System.Drawing.Bitmap bmp = Resources.BASIC;
             this.Icon = System.Drawing.Icon.FromHandle(bmp.GetHicon());
 
-            // Sets the logo as the form's icon
-            //this.Icon = new System.Drawing.Icon(logoFilePath);
 
             // Creates the controls for username and password input
             Label usernameLabel = new Label()

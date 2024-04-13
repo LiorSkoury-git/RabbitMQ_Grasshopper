@@ -287,7 +287,6 @@ namespace RabbitMQ.GH.Consumer_Producer
             {
                 return Resources.CONS;
             }
-            //return Resources.
 
         }
 

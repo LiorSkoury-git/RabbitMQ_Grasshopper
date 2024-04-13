@@ -215,8 +215,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             {
 
                 return Resources.PRO2; 
-                // You can add image files to your project resources and access them like this:
-                // return Resources.IconForThisComponent;
+
             }
         }
 
