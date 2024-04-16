@@ -192,7 +192,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             pManager.AddTextParameter("Host", "H", "Host url name", GH_ParamAccess.item);
             pManager.AddIntegerParameter("Port", "P", "Port number of the broker", GH_ParamAccess.item);
             pManager.AddTextParameter("Queue", "Q", "Queue name for the consumer", GH_ParamAccess.item);
-            pManager.AddBooleanParameter("Competing", "C", "True if competing consumers (default=fasle)", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Competing", "C", "True if competing consumers (default=false)", GH_ParamAccess.item);
             pManager.AddTextParameter("Exchange", "Ex", "Exchange name for the consumer", GH_ParamAccess.item);
             pManager.AddIntegerParameter("ExchangeType", "Ex_T", "Exchange type: 0=Fanout,1=Direct,2=Topic", GH_ParamAccess.item);
             pManager.AddTextParameter("RoutingKeys", "RK", "Routing keys as list", GH_ParamAccess.list);
