@@ -50,3 +50,7 @@
 /Tutorial/Examples/Basic_routing/Consumer_C#/Consumer_2/obj
 /Tutorial/Examples/Basic_routing/Producer_C#/bin/Debug/net8.0
 /Tutorial/Examples/Basic_routing/Producer_C#/obj
+/Tutorial/Examples/Request_reply/Client_C#/bin/Debug/net8.0
+/Tutorial/Examples/Request_reply/Client_C#/obj
+/Tutorial/Examples/Request_reply/Server_C#/bin/Debug/net8.0
+/Tutorial/Examples/Request_reply/Server_C#/obj
