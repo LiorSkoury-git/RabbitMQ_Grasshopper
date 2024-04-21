@@ -54,3 +54,11 @@
 /Tutorial/Examples/Request_reply/Client_C#/obj
 /Tutorial/Examples/Request_reply/Server_C#/bin/Debug/net8.0
 /Tutorial/Examples/Request_reply/Server_C#/obj
+/Tutorial/Examples/Topic_routing/Consumer_C#/Consumer_1/bin/Debug/net8.0
+/Tutorial/Examples/Topic_routing/Consumer_C#/Consumer_1/obj
+/Tutorial/Examples/Topic_routing/Consumer_C#/Consumer_2/bin/Debug/net8.0
+/Tutorial/Examples/Topic_routing/Consumer_C#/Consumer_2/obj
+/Tutorial/Examples/Topic_routing/Consumer_C#/Consumer_3/bin/Debug/net8.0
+/Tutorial/Examples/Topic_routing/Consumer_C#/Consumer_3/obj
+/Tutorial/Examples/Topic_routing/Producer_C#/bin/Debug/net8.0
+/Tutorial/Examples/Topic_routing/Producer_C#/obj
