@@ -1,10 +1,11 @@
 import pika
-import random
 import sys
+import random
+from pika.exchange_type import ExchangeType
 
 
-def main(x: float = None, y: float = None, z: float = None):
-    # Set connection parameters. When connecting to a real server 'localhost' should be replaced by the server´s address.
+def main(x: float = None, y: float = None, z: float = None, d: float = None):
+    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
     # Instantiate a connection unsing the connection_parameters previously defined.
@@ -13,19 +14,18 @@ def main(x: float = None, y: float = None, z: float = None):
     # Instantiate a channel.
     channel = connection.channel()
 
-    # Instantiate a queue.
-    channel.queue_declare(queue='Transforms')
+    # Instantiate an exchange.
+    channel.exchange_declare(
+        exchange='pubsub', exchange_type=ExchangeType.fanout)
 
-    # Define the default message to send.
-    message = f"{x},{y},{z}"
+    # Define the message to send.
+    message = f"{x},{y},{z},{d}"
 
-    # Publish the message to the 'Transforms' queue.
-    channel.basic_publish(exchange='', routing_key='Transforms', body=message)
+    # Publish the message.
+    channel.basic_publish(exchange='pubsub', routing_key='', body=message)
 
-    # Print the sent message.
-    print(f'Sent message: {message}')
+    print(f"Sent message: {message}")
 
-    # Close connection.
     connection.close()
 
 
@@ -36,10 +36,12 @@ if __name__ == '__main__':
         x = args[1]
         y = args[2]
         z = args[3]
+        d = args[4]
     except:
         x = random.randint(1, 6)
         y = random.randint(1, 6)
         z = random.randint(1, 6)
+        d = random.randint(2, 5)
         print('Invalid arguments. Random values asigned')
     # Run script.
-    main(x, y, z)
+    main(x, y, z, d)

@@ -6,28 +6,35 @@ def on_message_received(channe, method, properties, body):
     print(f'[Area consumer] Received message: {body}')
 
 
-# Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
-connection_parameters = pika.ConnectionParameters('localhost')
+def main():
 
-# Instantiate a connection unsing the connection_parameters previously defined
-connection = pika.BlockingConnection(connection_parameters)
+    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
+    connection_parameters = pika.ConnectionParameters('localhost')
 
-# Instantiate a channel
-channel = connection.channel()
+    # Instantiate a connection unsing the connection_parameters previously defined
+    connection = pika.BlockingConnection(connection_parameters)
 
-# Instantiate an exchange and queue.
-channel.exchange_declare(exchange='topic', exchange_type=ExchangeType.topic)
-queue = channel.queue_declare(queue='', exclusive=True)
+    # Instantiate a channel
+    channel = connection.channel()
 
-# Bind the queue using the "square" and "both" keys.
-channel.queue_bind(exchange='topic',
-                   queue=queue.method.queue, routing_key='square.area')
+    # Instantiate an exchange and queue.
+    channel.exchange_declare(
+        exchange='topic', exchange_type=ExchangeType.topic)
+    queue = channel.queue_declare(queue='', exclusive=True)
+
+    # Bind the queue using the "square" and "both" keys.
+    channel.queue_bind(exchange='topic',
+                       queue=queue.method.queue, routing_key='square.area')
+
+    # Start consuming messages
+    channel.basic_consume(queue=queue.method.queue, auto_ack=True,
+                          on_message_callback=on_message_received)
+
+    print('[Area consumer] Started consuming messages')
+
+    channel.start_consuming()
 
 
-# Start consuming messages
-channel.basic_consume(queue=queue.method.queue, auto_ack=True,
-                      on_message_callback=on_message_received)
-
-print('[Area consumer] Started consuming messages')
-
-channel.start_consuming()
+if __name__ == '__main__':
+    # Run script.
+    main()

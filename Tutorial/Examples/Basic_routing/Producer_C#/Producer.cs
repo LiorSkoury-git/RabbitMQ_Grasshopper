@@ -2,32 +2,50 @@
 using System.Text;
 using RabbitMQ.Client;
 
-// Create connection.
-var factory = new ConnectionFactory{ HostName = "localhost"};
+class Program{
+    static void Main(string[] args){
+        //Variable declaration.
+        int x, y, l;
 
-// Instantiate the connection and one channel.
-using var connection = factory.CreateConnection();
-using var channel = connection.CreateModel();
+        // Create connection.
+        var factory = new ConnectionFactory{ HostName = "localhost"};
 
-// Declare an exchange called routing.
-channel.ExchangeDeclare(exchange: "routing", type: ExchangeType.Direct);
+        // Instantiate the connection and one channel.
+        using var connection = factory.CreateConnection();
+        using var channel = connection.CreateModel();
 
-// Instantiate a random number generator
-Random random = new Random();
-int x = random.Next(1, 6);
-int y = random.Next(1, 6);
-int l = random.Next(1, 6);
+        // Declare an exchange called routing.
+        channel.ExchangeDeclare(exchange: "routing", type: ExchangeType.Direct);
 
-// Declare message to produce and encode it as bytes
-var message = string.Format("{0},{1},{2}", x, y, l);
-var encodedMessage = Encoding.UTF8.GetBytes(message);
+        // Instantiate a random number generator
+        Random random = new Random();
 
-// Select key to use for routing the message.
-string[] keys = {"square", "circle", "shape"}; 
-string key = keys[random.Next(0, keys.Length)];
+        try{
+            x = int.Parse(args[0]);
+            y = int.Parse(args[1]);
+            l = int.Parse(args[2]);
+        }
+        catch{
+            x = random.Next(1, 6);
+            y = random.Next(1, 6);
+            l = random.Next(1, 6);
+            Console.WriteLine("Invalid arguments. Random values asigned");
 
-// Start publishing to the exchange.
-channel.BasicPublish(exchange: "routing", routingKey: key, null, encodedMessage);
+        }
+        
 
-// Print the published message to console.
-Console.WriteLine($"Sent message: {message} with the key {key}");
+        // Declare message to produce and encode it as bytes
+        var message = string.Format("{0},{1},{2}", x, y, l);
+        var encodedMessage = Encoding.UTF8.GetBytes(message);
+
+        // Select key to use for routing the message.
+        string[] keys = {"square", "circle", "shape"}; 
+        string key = keys[random.Next(0, keys.Length)];
+
+        // Start publishing to the exchange.
+        channel.BasicPublish(exchange: "routing", routingKey: key, null, encodedMessage);
+
+        // Print the published message to console.
+        Console.WriteLine($"Sent message: {message} with the key {key}");
+    }
+}

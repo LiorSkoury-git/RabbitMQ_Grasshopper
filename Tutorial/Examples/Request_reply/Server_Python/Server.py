@@ -12,22 +12,29 @@ def on_request_message_received(ch, method, properties, body):
                      body=f"The requested area for {properties.correlation_id} is {area_from_diam(float(body.decode('utf-8')))}")
 
 
-# Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
-connection_parameters = pika.ConnectionParameters('localhost')
+def main():
 
-# Instantiate a connection unsing the connection_parameters previously defined
-connection = pika.BlockingConnection(connection_parameters)
+    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
+    connection_parameters = pika.ConnectionParameters('localhost')
 
-# Instantiate a channel
-channel = connection.channel()
+    # Instantiate a connection unsing the connection_parameters previously defined
+    connection = pika.BlockingConnection(connection_parameters)
 
-# Instantiate the queue for requests.
-channel.queue_declare(queue='request-queue')
+    # Instantiate a channel
+    channel = connection.channel()
 
-# Start consuming requests.
-channel.basic_consume(queue='request-queue', auto_ack=True,
-                      on_message_callback=on_request_message_received)
+    # Instantiate the queue for requests.
+    channel.queue_declare(queue='request-queue')
 
-print("Server started")
+    # Start consuming requests.
+    channel.basic_consume(queue='request-queue', auto_ack=True,
+                          on_message_callback=on_request_message_received)
 
-channel.start_consuming()
+    print("Server started")
+
+    channel.start_consuming()
+
+
+if __name__ == '__main__':
+    # Run script.
+    main()

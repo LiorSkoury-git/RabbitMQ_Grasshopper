@@ -1,13 +1,11 @@
 import pika
-from pika.exchange_type import ExchangeType
 
 
 def on_message_received(channe, method, properties, body):
-    print(f'[Perimeter consumer] Received message: {body}')
+    print(f'[Subscriber 2] Received message: {body}')
 
 
 def main():
-
     # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
@@ -17,20 +15,18 @@ def main():
     # Instantiate a channel
     channel = connection.channel()
 
-    # Instantiate an exchange and queue.
-    channel.exchange_declare(
-        exchange='topic', exchange_type=ExchangeType.topic)
+    # Instantiate an exchange
+    channel.exchange_declare(exchange='pubsub', exchange_type='fanout')
+
+    # Instantiate a queue
     queue = channel.queue_declare(queue='', exclusive=True)
+    channel.queue_bind(exchange='pubsub', queue=queue.method.queue)
 
-    # Bind the queue using the "square" and "both" keys.
-    channel.queue_bind(exchange='topic',
-                       queue=queue.method.queue, routing_key='square.perimeter')
-
-    # Start consuming messages
+    # Publish the message to the pubsub exchange
     channel.basic_consume(queue=queue.method.queue, auto_ack=True,
                           on_message_callback=on_message_received)
 
-    print('[Perimeter consumer] Started consuming messages')
+    print('[Consumer 2] Started consuming messages')
 
     channel.start_consuming()
 

@@ -12,28 +12,28 @@ class Program{
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
 
-        // Declare a queue called Transforms.
-        channel.QueueDeclare(
-            queue : "Transforms", 
-            durable: false, 
-            exclusive: false, 
-            autoDelete: false);
+        // Declare an exchange.
+        channel.ExchangeDeclare(exchange: "pubsub", type: ExchangeType.Fanout);
+
+        // Declare a queue and bind it to the exchange.
+        var queueName = channel.QueueDeclare().QueueName;
+        channel.QueueBind(queue: queueName, exchange: "pubsub", routingKey: "");
 
         // Declare consumer.
         var consumer = new EventingBasicConsumer(channel);
 
         // Subscribe to the Received event.
-        consumer.Received += (model, ea) =>{
-            // Get the body of the message as byte array, decode to string and print it.
+        consumer.Received += (model, ea) =>
+        {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-            Console.WriteLine($"Message received: {message}");
+            Console.WriteLine($"[Subscriber 1] Recieved new message: {message}");
         };
 
-        // Start consuming messages from Transforms.
-        channel.BasicConsume(queue: "Transforms", autoAck: true, consumer: consumer);
-        Console.WriteLine("Started consuming");
 
+        // Start consuming messages without auto aknowledging received messages.
+        channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+        Console.WriteLine("[Subscriber 1] Started consuming");
 
         // Wait for a keypress to exit.
         Console.ReadKey();

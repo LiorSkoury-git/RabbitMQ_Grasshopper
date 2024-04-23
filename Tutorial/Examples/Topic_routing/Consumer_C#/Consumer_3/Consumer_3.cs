@@ -12,12 +12,13 @@ class Program{
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
 
-        // Declare a queue called Transforms.
-        channel.QueueDeclare(
-            queue : "Transforms", 
-            durable: false, 
-            exclusive: false, 
-            autoDelete: false);
+        // Declare an exchange called topic.
+        channel.ExchangeDeclare(exchange: "topic", type: ExchangeType.Topic);
+
+        // Declare a queue and bind it using the "square" and "both" keys.
+        var queueName = channel.QueueDeclare().QueueName;
+        channel.QueueBind(queue: queueName, exchange: "topic", routingKey: "square.*");
+
 
         // Declare consumer.
         var consumer = new EventingBasicConsumer(channel);
@@ -27,13 +28,12 @@ class Program{
             // Get the body of the message as byte array, decode to string and print it.
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-            Console.WriteLine($"Message received: {message}");
+            Console.WriteLine($"[General consumer] Message received: {message}");
         };
 
-        // Start consuming messages from Transforms.
-        channel.BasicConsume(queue: "Transforms", autoAck: true, consumer: consumer);
-        Console.WriteLine("Started consuming");
-
+        // Start consuming messages.
+        channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
+        Console.WriteLine("[General consumer] Started consuming");
 
         // Wait for a keypress to exit.
         Console.ReadKey();
