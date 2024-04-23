@@ -164,7 +164,7 @@ namespace RabbitMQ.GH.Server_Client
         {
             try
             {
-                RhinoApp.WriteLine("Handling message...");
+                //RhinoApp.WriteLine("Handling message...");
                 // Acknowledges the message.
                 connection.channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                 // Gets the message body decoded as String.
@@ -172,14 +172,14 @@ namespace RabbitMQ.GH.Server_Client
                 var result = handler.HandleMessage(body);
                 // Updates state variables.
                 lastReceivedMessage = result;
-                RhinoApp.WriteLine("Message handled successfully.");
+                // RhinoApp.WriteLine("Message handled successfully.");
                 // Recomputes the component´s solution to keep consuming messages.
                 ExpireSolution(true);
             }
             catch (Exception ex)
             {
                 // Error handling.
-                RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
+                // RhinoApp.WriteLine($"Exception in HandleReceivedMessage: {ex.Message}");
                 // Recomputes the component´s solution to keep consuming messages.
                 // ExpireSolution(true);
             }
@@ -269,7 +269,7 @@ namespace RabbitMQ.GH.Server_Client
                     {
                         connection.closeConnection(); // Close the connection setup if not done yet.
                     }
-                    catch { RhinoApp.WriteLine("The connection is closed"); }
+                    catch { // RhinoApp.WriteLine("The connection is closed"); }
 
 
                     // Updates state variables.

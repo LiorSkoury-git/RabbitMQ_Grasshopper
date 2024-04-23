@@ -104,7 +104,7 @@ namespace RabbitMQ.GH.Consumer_Producer
 
             // Sends the message and confirms to the user.
             connection.channel.BasicPublish(exchange: exchange, routingKey: routingKey, null, encodeMessage);
-            Rhino.RhinoApp.WriteLine("Message was sent");
+            // Rhino.RhinoApp.WriteLine("Message was sent");
         }
         
         /// <summary>
@@ -199,7 +199,7 @@ namespace RabbitMQ.GH.Consumer_Producer
                 }
                 catch (Exception ex)
                 {
-                    RhinoApp.WriteLine($"Exception in HandleMessageReceived: {ex.Message}");
+                    // RhinoApp.WriteLine($"Exception in HandleMessageReceived: {ex.Message}");
                 }
             }
         }

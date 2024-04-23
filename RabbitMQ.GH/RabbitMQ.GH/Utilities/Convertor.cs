@@ -35,7 +35,7 @@ namespace RabbitMQ.GH.Utilities
                 var t = wrapper.Value.GetType().ToString();
                 string so = null;
 
-                Rhino.RhinoApp.WriteLine(wrapper.Value.GetType().ToString());
+                // Rhino.RhinoApp.WriteLine(wrapper.Value.GetType().ToString());
 
                 // Converts base geometry objects.
                 if (wrapper.Value is GeometryBase ghGeometry)
