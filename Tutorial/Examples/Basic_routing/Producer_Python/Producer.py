@@ -22,7 +22,7 @@ l = random.randint(2, 4)
 message = f"{x},{y},{l}"
 
 # Select the routing key to use when sending the message.
-routing_keys = ['square', 'circle', 'both']
+routing_keys = ['square', 'circle', 'shape']
 key = routing_keys[random.randint(0, len(routing_keys)-1)]
 
 # Publish the message to the letterbox queue

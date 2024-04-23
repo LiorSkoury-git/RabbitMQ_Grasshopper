@@ -19,11 +19,11 @@ channel = connection.channel()
 channel.exchange_declare(exchange='routing', exchange_type=ExchangeType.direct)
 queue = channel.queue_declare(queue='', exclusive=True)
 
-# Bind the queue using the "square" and "both" keys.
+# Bind the queue using the "square" and "shape" keys.
 channel.queue_bind(exchange='routing',
                    queue=queue.method.queue, routing_key='square')
 channel.queue_bind(exchange='routing',
-                   queue=queue.method.queue, routing_key='both')
+                   queue=queue.method.queue, routing_key='shape')
 
 # Start consuming messages
 channel.basic_consume(queue=queue.method.queue, auto_ack=True,

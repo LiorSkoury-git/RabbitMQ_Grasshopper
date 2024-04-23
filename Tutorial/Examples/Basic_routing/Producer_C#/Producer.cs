@@ -23,7 +23,7 @@ var message = string.Format("{0},{1},{2}", x, y, l);
 var encodedMessage = Encoding.UTF8.GetBytes(message);
 
 // Select key to use for routing the message.
-string[] keys = {"square", "circle", "both"}; 
+string[] keys = {"square", "circle", "shape"}; 
 string key = keys[random.Next(0, keys.Length)];
 
 // Start publishing to the exchange.

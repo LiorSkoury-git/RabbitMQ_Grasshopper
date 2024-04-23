@@ -13,10 +13,10 @@ using var channel = connection.CreateModel();
 // Declare an exchange called routing.
 channel.ExchangeDeclare(exchange: "routing", type: ExchangeType.Direct);
 
-// Declare a queue and bind it using the "circle" and "both" keys.
+// Declare a queue and bind it using the "circle" and "shape" keys.
 var queueName = channel.QueueDeclare().QueueName;
 channel.QueueBind(queue: queueName, exchange: "routing", routingKey: "circle");
-channel.QueueBind(queue: queueName, exchange: "routing", routingKey: "both");
+channel.QueueBind(queue: queueName, exchange: "routing", routingKey: "shape");
 
 // Declare consumer.
 var consumer = new EventingBasicConsumer(channel);
