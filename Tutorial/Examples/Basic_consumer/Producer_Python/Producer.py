@@ -4,7 +4,7 @@ import sys
 
 
 def main(x: float = None, y: float = None, z: float = None):
-    # Set connection parameters. When connecting to a real server 'localhost' should be replaced by the server´s address.
+    # Set connection parameters. When connecting to a real server, 'localhost' should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
     # Instantiate a connection unsing the connection_parameters previously defined.

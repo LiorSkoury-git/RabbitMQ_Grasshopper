@@ -9,19 +9,19 @@ def on_reply_message_received(ch, method, properties, body):
 
 
 def main(diameter: float = None):
-    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
+    # Set connection parameters. When connecting to a real server, localhost should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
-    # Instantiate a connection unsing the connection_parameters previously defined
+    # Instantiate a connection unsing the connection_parameters previously defined.
     connection = pika.BlockingConnection(connection_parameters)
 
-    # Instantiate a channel
+    # Instantiate a channel.
     channel = connection.channel()
 
     # Instantiate the queue for replies.
     reply_queue = channel.queue_declare(queue='', exclusive=True)
 
-    # Start consuming repli.
+    # Start consuming replies.
     channel.basic_consume(queue=reply_queue.method.queue, auto_ack=True,
                           on_message_callback=on_reply_message_received)
 

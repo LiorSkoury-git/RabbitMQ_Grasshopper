@@ -5,7 +5,7 @@ using RabbitMQ.Client.Events;
 
 class Program{
     static void Main(string[] args){
-        // Create connection.
+        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory{ HostName = "localhost"};
 
         // Instantiate the connection and one channel.

@@ -7,17 +7,17 @@ class Program{
         //Variable declaration.
         int l;
 
-        // Create connection.
+        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory{ HostName = "localhost"};
 
         // Instantiate the connection and one channel.
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
 
-        // Declare an exchange called routing.
+        // Declare an exchange called topic.
         channel.ExchangeDeclare(exchange: "topic", type: ExchangeType.Topic);
 
-        // Instantiate a random number generator
+        // Instantiate a random number generator.
         Random random = new Random();
 
 
@@ -30,7 +30,7 @@ class Program{
 
         }
 
-        // Declare message to produce and encode it as bytes
+        // Declare message to produce and encode it as bytes.
         var message = string.Format("{0}", l);
         var encodedMessage = Encoding.UTF8.GetBytes(message);
 

@@ -10,7 +10,7 @@ class Program{
         //Variable declaration.
         int h;
 
-        // Create connection.
+        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory{ HostName = "localhost"};
 
         // Instantiate the connection and one channel.
@@ -62,7 +62,7 @@ class Program{
             // Print the published message to console.
             Console.WriteLine($"Send message: {message}");
 
-            // var waitTime = random.Next(1, 5);
+            // Add a delay that simulates processing time.
             Task.Delay(TimeSpan.FromSeconds(0.1)).Wait();
 
             // Update the id for the next message.

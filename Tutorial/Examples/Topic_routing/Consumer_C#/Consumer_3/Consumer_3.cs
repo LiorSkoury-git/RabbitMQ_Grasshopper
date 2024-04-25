@@ -5,7 +5,7 @@ using RabbitMQ.Client.Events;
 
 class Program{
     static void Main(string[] args){
-        // Create connection.
+        // Create connection.  When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory{ HostName = "localhost"};
 
         // Instantiate the connection and one channel.
@@ -15,7 +15,7 @@ class Program{
         // Declare an exchange called topic.
         channel.ExchangeDeclare(exchange: "topic", type: ExchangeType.Topic);
 
-        // Declare a queue and bind it using the "square" and "both" keys.
+        // Declare a queue and bind it using the "square.*" key.
         var queueName = channel.QueueDeclare().QueueName;
         channel.QueueBind(queue: queueName, exchange: "topic", routingKey: "square.*");
 

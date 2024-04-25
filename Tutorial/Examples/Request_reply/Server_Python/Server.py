@@ -14,13 +14,13 @@ def on_request_message_received(ch, method, properties, body):
 
 def main():
 
-    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
+    # Set connection parameters. When connecting to a real server, localhost should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
-    # Instantiate a connection unsing the connection_parameters previously defined
+    # Instantiate a connection unsing the connection_parameters previously defined.
     connection = pika.BlockingConnection(connection_parameters)
 
-    # Instantiate a channel
+    # Instantiate a channel.
     channel = connection.channel()
 
     # Instantiate the queue for requests.

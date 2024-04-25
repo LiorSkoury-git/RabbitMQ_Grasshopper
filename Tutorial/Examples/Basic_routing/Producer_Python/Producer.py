@@ -5,33 +5,33 @@ from pika.exchange_type import ExchangeType
 
 
 def main(x: float = None, y: float = None, l: float = None):
-    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
+    # Set connection parameters. Whenconnecting to a real server, localhost should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
-    # Instantiate a connection unsing the connection_parameters previously defined
+    # Instantiate a connection unsing the connection_parameters previously defined.
     connection = pika.BlockingConnection(connection_parameters)
 
-    # Instantiate a channel
+    # Instantiate a channel.
     channel = connection.channel()
 
-    # Instantiate an exchange
+    # Instantiate an exchange.
     channel.exchange_declare(
         exchange='routing', exchange_type=ExchangeType.direct)
 
-    # Define the message to send
+    # Define the message to send.
     message = f"{x},{y},{l}"
 
-    # Select the routing key to use when sending the message.
+    # Select randomly the routing key to use when sending the message.
     routing_keys = ['square', 'circle', 'shape']
     key = routing_keys[random.randint(0, len(routing_keys)-1)]
 
-    # Publish the message to the letterbox queue
+    # Publish the message to the routing exchange.
     channel.basic_publish(exchange='routing', routing_key=key, body=message)
 
-    # Print the sent message
+    # Print the sent message.
     print(f'Sent message: {message} with the key {key}')
 
-    # Close connection
+    # Close connection.
     connection.close()
 
 

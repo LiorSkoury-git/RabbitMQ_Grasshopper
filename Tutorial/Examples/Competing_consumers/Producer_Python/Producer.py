@@ -5,7 +5,7 @@ import random
 
 
 def main(h: int = None):
-    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
+    # Set connection parameters. When, connecting to a real server, localhost should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
     # Instantiate a connection unsing the connection_parameters previously defined.
@@ -40,11 +40,10 @@ def main(h: int = None):
 
         print(f"sent message: {message}")
 
-        # Calculate delay.
+        # Calculate delay to simulate processing time.
         time.sleep(0.1)
 
-        # Update the id for the next message.
-
+        # Update the counter for the next message.
         if count > h or count < 0:
             adder *= -1
         count += adder

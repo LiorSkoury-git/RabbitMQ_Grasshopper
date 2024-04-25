@@ -6,8 +6,8 @@ class Program{
     static void Main(string[] args){
         //Variable declaration.
         float diameter;
-        
-        // Create connection.
+
+        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory() { HostName = "localhost" };
 
         // Instantiate the connection and one channel.
@@ -39,7 +39,7 @@ class Program{
         var properties = channel.CreateBasicProperties();
         properties.ReplyTo = replyQueue.QueueName;
 
-        // Get a unique id to relate replies qith requests.
+        // Get a unique id to relate replies with requests.
         properties.CorrelationId = Guid.NewGuid().ToString();
 
         // Get the body of the reply message as byte array, encode to string and print it.
@@ -47,7 +47,7 @@ class Program{
             diameter = float.Parse(args[0]);
         }
         catch{
-            // Instantiate a random number generator
+            // Instantiate a random number generator.
             Random random = new Random();
             diameter = random.Next(1, 6);
             Console.WriteLine("Invalid arguments. Random value asigned");

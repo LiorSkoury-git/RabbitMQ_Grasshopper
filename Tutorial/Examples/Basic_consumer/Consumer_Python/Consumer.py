@@ -1,14 +1,12 @@
 import pika
 
 # Callback method to handle received messages.
-
-
 def on_message_received(channe, method, properties, body):
     print(f'Received message: {body}')
 
 
 def main():
-    # Set connection parameters. When connecting to a real server 'localhost' should be replaced by the server´s address.
+    # Set connection parameters. When connecting to a real server, 'localhost' should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
     # Instantiate a connection unsing the connection_parameters previously defined.

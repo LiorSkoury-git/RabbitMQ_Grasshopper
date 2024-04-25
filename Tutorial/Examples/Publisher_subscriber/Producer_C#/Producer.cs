@@ -10,7 +10,7 @@ class Program{
         //Variable declaration.
         int x, y, z, d;
 
-        // Create connection.
+        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory{ HostName = "localhost"};
 
         // Instantiate the connection and one channel.
@@ -25,8 +25,9 @@ class Program{
             d = int.Parse(args[3]);
         }
         catch{
-            // Instantiate a random number generator
+            // Instantiate a random number generator.
             Random random = new Random();
+
             x = random.Next(1, 6);
             y = random.Next(1, 6);
             z = random.Next(1, 6);
@@ -34,7 +35,7 @@ class Program{
             Console.WriteLine("Invalid arguments. Random values asigned");
         }
 
-        // Declare message to produce and encode it as bytes
+        // Declare message to produce and encode it as bytes.
         var message = string.Format("{0},{1},{2},{3}", x, y, z, d);
         var encodedMessage = Encoding.UTF8.GetBytes(message);
 

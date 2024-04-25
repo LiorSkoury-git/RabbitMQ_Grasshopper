@@ -8,13 +8,13 @@ def on_message_received(channe, method, properties, body):
 
 def main():
 
-    # Set connection parameters. If connecting to a real server localhost should be replaced by the server´s address.
+    # Set connection parameters. When connecting to a real server, localhost should be replaced by the server´s address.
     connection_parameters = pika.ConnectionParameters('localhost')
 
-    # Instantiate a connection unsing the connection_parameters previously defined
+    # Instantiate a connection unsing the connection_parameters previously defined.
     connection = pika.BlockingConnection(connection_parameters)
 
-    # Instantiate a channel
+    # Instantiate a channel.
     channel = connection.channel()
 
     # Instantiate an exchange and queue.
@@ -22,11 +22,11 @@ def main():
         exchange='topic', exchange_type=ExchangeType.topic)
     queue = channel.queue_declare(queue='', exclusive=True)
 
-    # Bind the queue using the "square" and "both" keys.
+    # Bind the queue using the "square.perimeter" key.
     channel.queue_bind(exchange='topic',
                        queue=queue.method.queue, routing_key='square.perimeter')
 
-    # Start consuming messages
+    # Start consuming messages.
     channel.basic_consume(queue=queue.method.queue, auto_ack=True,
                           on_message_callback=on_message_received)
 

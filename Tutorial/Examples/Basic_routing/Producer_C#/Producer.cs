@@ -7,7 +7,7 @@ class Program{
         //Variable declaration.
         int x, y, l;
 
-        // Create connection.
+        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory{ HostName = "localhost"};
 
         // Instantiate the connection and one channel.
@@ -17,7 +17,7 @@ class Program{
         // Declare an exchange called routing.
         channel.ExchangeDeclare(exchange: "routing", type: ExchangeType.Direct);
 
-        // Instantiate a random number generator
+        // Instantiate a random number generator.
         Random random = new Random();
 
         try{
@@ -34,7 +34,7 @@ class Program{
         }
         
 
-        // Declare message to produce and encode it as bytes
+        // Declare message to produce and encode it as bytes.
         var message = string.Format("{0},{1},{2}", x, y, l);
         var encodedMessage = Encoding.UTF8.GetBytes(message);
 
@@ -42,7 +42,7 @@ class Program{
         string[] keys = {"square", "circle", "shape"}; 
         string key = keys[random.Next(0, keys.Length)];
 
-        // Start publishing to the exchange.
+        // Start publishing to the routing exchange.
         channel.BasicPublish(exchange: "routing", routingKey: key, null, encodedMessage);
 
         // Print the published message to console.

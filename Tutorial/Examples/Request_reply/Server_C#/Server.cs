@@ -7,7 +7,7 @@ class Program{
     static void Main(string[] args){
         //Variable declaration.
         float diameter;
-        // Create connection.
+        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
         var factory = new ConnectionFactory() { HostName = "localhost" };
 
         // Instantiate the connection and one channel.
@@ -51,7 +51,7 @@ class Program{
             channel.BasicPublish("", ea.BasicProperties.ReplyTo, null, body);
         };
 
-        // Start consuming messages form the request queue.
+        // Start consuming messages form the request-queue.
         channel.BasicConsume(queue: "request-queue", autoAck: true, consumer: consumer);
 
         // Wait for a keypress to exit.
