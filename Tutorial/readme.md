@@ -4,7 +4,7 @@ RabbitMQ GH is a grasshopper plugin for the implementation RabbitMQ messaging ca
 
 ## TABLE OF CONTENTS
 - [Installation](#installation)
-- [Use Patterns](#Use_patterns)
+- [Use Patterns](#use-patterns)
 ## INSTALLATION
 ### Erlang installation
 Downoload the current [Erlang](https://erlang.org/download/otp_versions_tree.html) version installer and follow the default setup in the installation wizard.
@@ -21,17 +21,23 @@ In RabbitMQ´s [GitHub page](https://github.com/rabbitmq/rabbitmq-server/) go to
 
 To run RabbitMQ, open a termial window and go to the installation directory. Once there, run the ```rabbitmq-server.bat``` command. The current Erlang version and the plugins being used, should be printed on the screen.
 
+In Windows, RabbitMQ does not run on startup by default. To change that, the Startup type of the RabbitMQ Server must be set to *Automatic*
+
 If the plugins are not working properly, follow the same procedure described in the following section to activate them.
+
+
 
 ### Management plugin activation
 To activate the management plugin,open a termial window and go to the installation directory. After that, run the ```rabbitmq-plugins enable rabbitmq_management``` command. This should enable the plugion and it should be working the next time RabbitMQ is launched. The same command works for activating other plugins by replacing *rabbitmq_management* by the plugin's name after it has been downloaded into the plugins directory located on RabbitMQ's installation directory.
 
-For further information, visit this [link](https://youtube.com/playlist?list=PLalrWAGybpB-UHbRDhFsBgXJM1g6T4IvO&si=324s3u0WqtVukrIl)
+For further information, visit this [link](https://youtube.com/playlist?list=PLalrWAGybpB-UHbRDhFsBgXJM1g6T4IvO&si=324s3u0WqtVukrIl).
 
 ### Grashopper plugin installation
-Download the [plugin files](Add_link_to_files) and copy them in your grasshopper component folder. If you don´t know the location of this folder on your computer, you can fin it out in grasshoppers interface. Go to *File>Special Folders>Components Folder* and a file explorer window will open in the correct directory.
+Download the [plugin files]() and copy them into your grasshopper component folder. If you don´t know the location of this folder on your computer, you can fin it out in grasshoppers interface. Go to *File>Special Folders>Components Folder* and a file explorer window will open in the correct directory.
 
 In general, downloaded *.gha* files can be blocked by Windows os, so verify that all the dowloaded files are unblocked. To do so, find each file in the file explorer and right click on it. In the context menu select *Properties*. This will open a new windodw. Go to the lower part to the *general* tab and check the chebox labeled *Unblock*.
+
+For the use of the plugin, even after closing the *.gh* files, the connections created in the session wil remain open ir the *Run* toggle is set to ```True```. To prevent this, make sure to set the toggle to ```False``` before closing the file.
 
 ### Additional resources
 * [Linux machine deployment](https://gcore.com/learning/how-to-install-rabbitmq-ubuntu/)
@@ -41,12 +47,18 @@ In general, downloaded *.gha* files can be blocked by Windows os, so verify that
 To open the management plugin, in your web borwser navigate to ```localhost:15672``` If no credentials have been established, use ```guest``` as the default *username* and *password* to log in.
 
 ## USE PATTERNS
-- [Consumer-producer]()
-- [Competing consumers]()
-- [Publisher-subscriber]()
-- [Request-reply]()
-- [Basic routing]()
-- [Topic routing]()
+Example files covering several use patterns for Grasshopper, Python and C# are located in the [Examples](https://github.com/LiorSkoury-git/RabbitMQ_Grasshopper/tree/Documentation/Tutorial/Examples) folder. 
 
+Most of them build on top of the consumer-producer pattern. It has two main components: A producer that sends messages to a RabbitMQ queue and a consumer that receives the messages and processes them.
 
+These are all the patterns covered in the example files:
+
+- Consumer-producer
+- Competing consumers
+- Publisher-subscriber
+- Request-reply
+- Basic routing
+- Topic routing
+
+They are covered in detail in the complementary [readme](Examples/readme.md) file.
 
