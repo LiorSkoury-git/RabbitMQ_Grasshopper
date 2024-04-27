@@ -8,7 +8,7 @@ def on_message_received(ch, method, properties, body):
     # Set a random time that simulates the processing of the mesage.
     processing_time = random.randint(1, 6)
     # Print the received message.
-    print(f'Received message: {body}')
+    print(f'[Consumer 1] Received message: {body}')
     # Simulate message processing.
     time.sleep(processing_time)
     # Acknowledge the received message after processing it.

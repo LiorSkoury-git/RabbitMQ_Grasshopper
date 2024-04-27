@@ -26,7 +26,7 @@ def main():
     channel.basic_consume(queue=queue.method.queue, auto_ack=True,
                           on_message_callback=on_message_received)
 
-    print('[Consumer 2] Started consuming messages')
+    print('[Subscriber 2] Started consuming messages')
 
     channel.start_consuming()
 
