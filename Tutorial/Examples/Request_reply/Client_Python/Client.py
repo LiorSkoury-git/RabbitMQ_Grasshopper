@@ -6,6 +6,7 @@ import sys
 
 def on_reply_message_received(ch, method, properties, body):
     print(f"Received reply: {body}")
+    # Close connection here
 
 
 def main(diameter: float = None):
@@ -38,7 +39,7 @@ def main(diameter: float = None):
     channel.basic_publish('', routing_key='request-queue', properties=pika.BasicProperties(
         reply_to=reply_queue.method.queue,
         correlation_id=cor_id
-    ), body=diameter)
+    ), body=body)
 
     print(f"Sent area request {cor_id} for diameter {body}")
 
