@@ -3,7 +3,9 @@ from pika.exchange_type import ExchangeType
 
 
 def on_message_received(channe, method, properties, body):
+    body = float(body.decode())
     print(f'[Area consumer] Received message: {body}')
+    print(f'    Calculated area: {body**2}')
 
 
 def main(connection):
