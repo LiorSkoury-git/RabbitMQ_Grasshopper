@@ -6,15 +6,10 @@ import sys
 
 def on_reply_message_received(ch, method, properties, body):
     print(f"Received reply: {body}")
-    # Close connection here
+    connection.close()
 
 
-def main(diameter: float = None):
-    # Set connection parameters. When connecting to a real server, localhost should be replaced by the server´s address.
-    connection_parameters = pika.ConnectionParameters('localhost')
-
-    # Instantiate a connection unsing the connection_parameters previously defined.
-    connection = pika.BlockingConnection(connection_parameters)
+def main(connection, diameter: float = None):
 
     # Instantiate a channel.
     channel = connection.channel()
@@ -54,5 +49,12 @@ if __name__ == '__main__':
     except:
         diameter = random.randint(1, 6)
         print('Invalid arguments. Random value asigned')
+
+    # Set connection parameters. When connecting to a real server, localhost should be replaced by the server´s address.
+    connection_parameters = pika.ConnectionParameters('localhost')
+
+    # Instantiate a connection unsing the connection_parameters previously defined.
+    connection = pika.BlockingConnection(connection_parameters)
+
     # Run script.
-    main(diameter)
+    main(connection, diameter)

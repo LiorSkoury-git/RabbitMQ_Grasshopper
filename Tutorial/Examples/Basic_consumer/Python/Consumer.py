@@ -1,17 +1,13 @@
 import pika
 
 # Callback method to handle received messages.
+
+
 def on_message_received(channe, method, properties, body):
     print(f'Received message: {body}')
 
 
-def main():
-    # Set connection parameters. When connecting to a real server, 'localhost' should be replaced by the server´s address.
-    connection_parameters = pika.ConnectionParameters('localhost')
-
-    # Instantiate a connection unsing the connection_parameters previously defined.
-    connection = pika.BlockingConnection(connection_parameters)
-
+def main(connection):
     # Instantiate a channel.
     channel = connection.channel()
 
@@ -28,5 +24,18 @@ def main():
 
 
 if __name__ == '__main__':
-    # Run script.
-    main()
+
+    # Set connection parameters. When connecting to a real server, 'localhost' should be replaced by the server´s address.
+    connection_parameters = pika.ConnectionParameters('localhost')
+
+    # Instantiate a connection unsing the connection_parameters previously defined.
+    connection = pika.BlockingConnection(connection_parameters)
+
+    try:
+        # Run script.
+        main(connection)
+
+    except KeyboardInterrupt:
+        # Handle user interruption.
+        print('Loop stopped by user')
+        connection.close()

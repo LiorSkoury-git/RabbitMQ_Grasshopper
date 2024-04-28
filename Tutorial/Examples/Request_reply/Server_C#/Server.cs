@@ -53,9 +53,12 @@ class Program{
 
         // Start consuming messages form the request-queue.
         channel.BasicConsume(queue: "request-queue", autoAck: true, consumer: consumer);
+        Console.WriteLine("Server started consuming");
 
         // Wait for a keypress to exit.
         Console.ReadKey();
+        Console.WriteLine("Loop stopped by user");
+        connection.Close();
     }
 
     static float AreaFromDiameter(float diam)

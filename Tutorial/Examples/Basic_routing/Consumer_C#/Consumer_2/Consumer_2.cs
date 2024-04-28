@@ -5,7 +5,7 @@ using RabbitMQ.Client.Events;
 
 class Program{
     static void Main(string[] args){
-        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
+        // Create connection. When connecting to a real server, localhost should be replaced by the serverï¿½s address.
         var factory = new ConnectionFactory{ HostName = "localhost"};
 
         // Instantiate the connection and one channel.
@@ -37,5 +37,7 @@ class Program{
 
         // Wait for a keypress to exit.
         Console.ReadKey();
+        Console.WriteLine("Loop stopped by user");
+        connection.Close();
     }
 }

@@ -4,12 +4,7 @@ import sys
 import random
 
 
-def main(h: int = None):
-    # Set connection parameters. When, connecting to a real server, localhost should be replaced by the server´s address.
-    connection_parameters = pika.ConnectionParameters('localhost')
-
-    # Instantiate a connection unsing the connection_parameters previously defined.
-    connection = pika.BlockingConnection(connection_parameters)
+def main(connection, h: int = None):
 
     # Instantiate a channel.
     channel = connection.channel()
@@ -57,5 +52,18 @@ if __name__ == '__main__':
     except:
         h = random.randint(15, 20)
         print('Invalid arguments. Random value asigned')
-    # Run script.
-    main(h)
+
+    # Set connection parameters. When connecting to a real server, 'localhost' should be replaced by the server´s address.
+    connection_parameters = pika.ConnectionParameters('localhost')
+
+    # Instantiate a connection unsing the connection_parameters previously defined.
+    connection = pika.BlockingConnection(connection_parameters)
+
+    try:
+        # Run script.
+        main(connection, h)
+
+    except KeyboardInterrupt:
+        # Handle user interruption.
+        print('Loop stopped by user')
+        connection.close()

@@ -7,7 +7,7 @@ class Program{
         //Variable declaration.
         float diameter;
 
-        // Create connection. When connecting to a real server, localhost should be replaced by the server´s address.
+        // Create connection. When connecting to a real server, localhost should be replaced by the serverï¿½s address.
         var factory = new ConnectionFactory() { HostName = "localhost" };
 
         // Instantiate the connection and one channel.
@@ -30,6 +30,7 @@ class Program{
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
             Console.WriteLine($"Received reply: {message}");
+            
         };
 
         // Start consuming messages from the reply queue.
@@ -64,5 +65,7 @@ class Program{
 
         // Wait for a keypress to exit.
         Console.ReadKey();
+        Console.WriteLine("Loop stopped by user");
+        connection.Close();
     }
 }
