@@ -269,20 +269,22 @@ namespace RabbitMQ.GH.Server_Client
                     {
                         connection.closeConnection(); // Close the connection setup if not done yet.
                     }
-                    catch { // RhinoApp.WriteLine("The connection is closed"); }
+                    catch
+                    { // RhinoApp.WriteLine("The connection is closed"); }
 
 
-                    // Updates state variables.
-                    lastReceivedMessage = new List<object>() { "Turn on the Run to start consuming" };
-                    timerStarted = false;
-                    messageSent = false;
-                    currentMessage = null;
+                        // Updates state variables.
+                        lastReceivedMessage = new List<object>() { "Turn on the Run to start consuming" };
+                        timerStarted = false;
+                        messageSent = false;
+                        currentMessage = null;
+                    }
                 }
+
+                DA.SetDataList("Received", lastReceivedMessage);
+
+
             }
-
-            DA.SetDataList("Received", lastReceivedMessage);
-
-
         }
 
         #endregion Methods

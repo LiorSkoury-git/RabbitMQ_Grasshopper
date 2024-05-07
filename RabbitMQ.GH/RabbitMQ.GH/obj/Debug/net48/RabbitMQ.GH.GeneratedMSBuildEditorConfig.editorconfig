@@ -1,5 +1,3 @@
 is_global = true
 build_property.RootNamespace = RabbitMQ.GH
-build_property.ProjectDir = D:\Carrera\Maestría\ITECH\HiWis\RabbitMQ\Repo\RabbitMQ.GH\RabbitMQ.GH\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = C:\Users\liors\Desktop\RabbitMQ_Grasshopper\RabbitMQ.GH\RabbitMQ.GH\
