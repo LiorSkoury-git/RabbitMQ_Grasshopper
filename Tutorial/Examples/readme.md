@@ -4,6 +4,7 @@ Each pattern has a folder with its name documenting the implementation in C#, Py
 Both the C# and Python files can be run from the terminal window either passing the arguments specified in this document or passing no arguments to use default values. **Make sure that the RabbitMQ server is already running when trying to run the example files.**
 
 **python requirements - pika (pip install pika)**
+
 **C# requirements - .NET 8 SDK (winget install dotnet-sdk-8)**
 
 ## Basic consumer
