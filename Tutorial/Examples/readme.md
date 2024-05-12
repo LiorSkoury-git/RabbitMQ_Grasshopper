@@ -3,6 +3,9 @@ Each pattern has a folder with its name documenting the implementation in C#, Py
 
 Both the C# and Python files can be run from the terminal window either passing the arguments specified in this document or passing no arguments to use default values. **Make sure that the RabbitMQ server is already running when trying to run the example files.**
 
+**python requirements - pika (pip install pika)**
+**C# requirements - .NET 8 SDK (winget install dotnet-sdk-8)**
+
 ## Basic consumer
 
 The [basic consumer](https://github.com/LiorSkoury-git/RabbitMQ_Grasshopper/tree/Documentation/Tutorial/Examples/Basic_consumer) pattern consists of two elements. The producer sends messages to a queue while a consumer retrieves and processes one after the other as soon as it has available resources.

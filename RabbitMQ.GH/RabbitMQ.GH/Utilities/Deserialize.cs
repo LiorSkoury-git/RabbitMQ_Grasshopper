@@ -1,33 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography;
+
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Types;
-using Newtonsoft.Json;
 using RabbitMQ.GH.Properties;
-using Rhino.DocObjects;
-using Rhino.FileIO;
 using Rhino.Geometry;
-using Rhino.Render.ChangeQueue;
-using static Rhino.FileIO.FileObjWriteOptions;
 
 namespace RabbitMQ.GH.Utilities
 {
     /// <summary>
-    /// Represents a Rhino-to-String object converter component inheriting from the GH_component class.
+    /// Represents a String-to-Rhino object converter component inheriting from the GH_component class.
     /// </summary>
-    public class RhinoToString : GH_Component
+    public class Deserialize : GH_Component
     {
         #region Constructor
 
         /// <summary>
         /// Default constructor. Invokes the base class constructor.
         /// </summary>
-        public RhinoToString()
-          : base("RhinoToString", "RTS",
-              "Convert rhino object to string",
+        public Deserialize()
+          : base("Deserialize", "DES",
+              "Convert string to Rhino object",
               "RabbitMQ", "Utilities")
         {
         }
@@ -49,7 +42,7 @@ namespace RabbitMQ.GH.Utilities
         /// </summary>
         protected override void RegisterInputParams(GH_InputParamManager pManager)
         {
-            pManager.AddGenericParameter("Objects", "O", "Rhino objects to convert", GH_ParamAccess.list);
+            pManager.AddTextParameter("sObjects", "sO", "String objects to convert", GH_ParamAccess.list);
         }
 
         /// <summary>
@@ -57,7 +50,7 @@ namespace RabbitMQ.GH.Utilities
         /// </summary>
         protected override void RegisterOutputParams(GH_OutputParamManager pManager)
         {
-            pManager.AddTextParameter("JsonString", "S", "Json strings representing the rhino objects", GH_ParamAccess.list);
+            pManager.AddGenericParameter("Objects", "O", "Converted Rhino objects", GH_ParamAccess.list);
             pManager.AddTextParameter("Errors", "E", "Details about failed conversions", GH_ParamAccess.list);
         }
 
@@ -66,19 +59,18 @@ namespace RabbitMQ.GH.Utilities
         /// </summary>
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
-        {
+        {   
             // Reads the input data and returns early if unsuccessful.
-            List<GH_ObjectWrapper> objectWrappers = new List<GH_ObjectWrapper>();
-            if (!DA.GetDataList("Objects", objectWrappers)) return;
+            List<string> objectWrappers = new List<string>();
+            if (!DA.GetDataList("sObjects", objectWrappers)) return;
 
             // Stores converted objects and conversion errors.
             List<string> errors = new List<string>();
-            List<string> jsons = Convertor.ConvertToStrings(objectWrappers, out errors);
+            List<object> jsons = Convertor.ConvertToRhino(objectWrappers, out errors);
 
             // Outputs the converted objects.
-            DA.SetDataList("JsonString", jsons);
+            DA.SetDataList("Objects", jsons);
             DA.SetDataList("Errors", errors);
-
         }
 
         #endregion Methods
@@ -90,7 +82,7 @@ namespace RabbitMQ.GH.Utilities
         {
             get
             {
-                return Resources.RTS;
+                return Resources.STR;
             }
         }
 
@@ -99,7 +91,7 @@ namespace RabbitMQ.GH.Utilities
         /// </summary>
         public override Guid ComponentGuid
         {
-            get { return new Guid("942688C4-255B-495E-8115-559BCBBEF248"); }
+            get { return new Guid("27AD955D-6091-4986-942D-6E34283C84D6"); }
         }
     }
 }
