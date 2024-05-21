@@ -9,6 +9,7 @@ using RabbitMQ.Client;
 using System.Text;
 using Rhino;
 using RabbitMQ.GH.Properties;
+using System.Linq;
 
 namespace RabbitMQ.GH.Consumer_Producer
 {
@@ -22,7 +23,7 @@ namespace RabbitMQ.GH.Consumer_Producer
         // <summary>
         /// Represents a TCP connection to a RabbitMQ broker.
         /// </summary>
-        private Connection connection;
+        public Connection connection;
 
         #endregion Fields
 
@@ -56,7 +57,7 @@ namespace RabbitMQ.GH.Consumer_Producer
         /// <param name="host">Server host name.</param>
         /// <param name="port">Server port number.</param>
         /// <param name="vHost">Virtual host name.</param>
-        private void setConnection(string host, int port, string vHost)
+        private void setConnection(string host, int port, string vHost,bool keepConnection = false)
         {
             // Handles null values of vHost.
             if (vHost == null) { vHost = "/"; }
@@ -121,6 +122,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             pManager.AddIntegerParameter("ExchangeType", "Ex_T", "Exchange type: 0=Fanout,1=Direct,2=Topic", GH_ParamAccess.item);
             pManager.AddTextParameter("RoutingKeys", "RK", "Routing keys as list", GH_ParamAccess.list);
             pManager.AddTextParameter("vHost", "VH", "Virtual host if needed", GH_ParamAccess.item);
+            pManager.AddBooleanParameter("Alive", "A", "Keep connection alive for streaming", GH_ParamAccess.item);
 
             pManager[2].Optional = true;
             pManager[4].Optional = true;
@@ -128,6 +130,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             pManager[6].Optional = true;
             pManager[7].Optional = true;
             pManager[8].Optional = true;
+            pManager[9].Optional = true;
         }
 
         /// <summary>
@@ -154,6 +157,7 @@ namespace RabbitMQ.GH.Consumer_Producer
             List<string> routingKeys = new List<string>();
             List<string> messages = new List<string>();
             string vHost = null;
+            bool keep = false;
 
 
             // Get data from the component´s inputs
@@ -166,10 +170,20 @@ namespace RabbitMQ.GH.Consumer_Producer
             DA.GetDataList("RoutingKeys", routingKeys);
             DA.GetDataList("Body", messages);
             DA.GetData("vHost", ref vHost);
+            DA.GetData("Alive", ref keep);
 
             if (b)
-            {   
-                setConnection(host, port, vHost);
+            {
+                if (this.connection == null)
+                {
+                   setConnection(host, port, vHost, keep);
+                }
+
+                if (!this.connection.channel.IsOpen)
+                {
+                    setConnection(host,port,vHost,keep);
+                }
+                
                 for (int i = 0; i < messages.Count; i++)
                 {   
                     // Sets the routing key for the message.
@@ -191,11 +205,12 @@ namespace RabbitMQ.GH.Consumer_Producer
             }
 
             // Closes connection and handles errors.
-            if (connection != null)
+            if (connection != null && keep==false)
             {
                 try
                 {
                     connection.closeConnection();
+                    connection = null;
                 }
                 catch (Exception ex)
                 {
