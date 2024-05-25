@@ -15,13 +15,13 @@
   
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\RabbitMQ_GH\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="RabbitMQ.Core">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\RabbitMQ_GH\RabbitMQ.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\AppData\Roaming\Grasshopper\Libraries\RabbitMQ_GH\RabbitMQ.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
@@ -42,7 +42,7 @@
   </ItemGroup>
   
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;C:\Users\liors\Desktop\New folder\RabbitMQ_Grasshopper\RabbitMQ.GH\RabbitMQ.GH\bin\Debug\net48\RabbitMQ.GH.gha&quot; &quot;C:\Users\liors\AppData\Roaming\Grasshopper\Libraries\RabbitMQ_GH\RabbitMQ.GH.gha&quot;&#xD;&#xA;copy &quot;C:\Users\liors\Desktop\New folder\RabbitMQ_Grasshopper\RabbitMQ.GH\RabbitMQ.GH\bin\Debug\net48\RabbitMQ.Core.dll&quot; &quot;C:\Users\liors\AppData\Roaming\Grasshopper\Libraries\RabbitMQ_GH\RabbitMQ.Core.dll&quot;&#xD;&#xA;" />
+    <Exec Command="copy &quot;C:\Users\liors\Desktop\ICD\02_Projects\05_RabbitMQ\RabbitMQ_Grasshopper\RabbitMQ.GH\RabbitMQ.GH\bin\Debug\net48\RabbitMQ.GH.gha&quot; &quot;C:\Users\liors\AppData\Roaming\Grasshopper\Libraries\RabbitMQ_GH\RabbitMQ.GH.gha&quot;&#xD;&#xA;copy &quot;C:\Users\liors\Desktop\ICD\02_Projects\05_RabbitMQ\RabbitMQ_Grasshopper\RabbitMQ.GH\RabbitMQ.GH\bin\Debug\net48\RabbitMQ.Core.dll&quot; &quot;C:\Users\liors\AppData\Roaming\Grasshopper\Libraries\RabbitMQ_GH\RabbitMQ.Core.dll&quot;&#xD;&#xA;" />
   </Target>
 
 </Project>

@@ -436,11 +436,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\liors\\Desktop\\New folder\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\RabbitMQ.GH.csproj",
+      "projectUniqueName": "C:\\Users\\liors\\Desktop\\ICD\\02_Projects\\05_RabbitMQ\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\RabbitMQ.GH.csproj",
       "projectName": "RabbitMQ.GH",
-      "projectPath": "C:\\Users\\liors\\Desktop\\New folder\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\RabbitMQ.GH.csproj",
+      "projectPath": "C:\\Users\\liors\\Desktop\\ICD\\02_Projects\\05_RabbitMQ\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\RabbitMQ.GH.csproj",
       "packagesPath": "C:\\Users\\liors\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\liors\\Desktop\\New folder\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\obj\\",
+      "outputPath": "C:\\Users\\liors\\Desktop\\ICD\\02_Projects\\05_RabbitMQ\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

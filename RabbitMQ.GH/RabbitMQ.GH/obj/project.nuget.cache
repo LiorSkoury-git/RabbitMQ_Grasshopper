@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bELvreGmU1W/A9w3Lt39NfYj7TuTwHfVnQ3zvZUlDDQNAzD77xzKPgdUCZqt7lL8USG/fG96N+GmkJYlbRwkxg==",
+  "dgSpecHash": "DG2awn1Hkw7oeEKW9TGi31h1HSS01gTAl9DBcb9tEjBpdoapR1x9EiE8KZUx4XtkBfssJt9claq4wGmv+D8auA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\liors\\Desktop\\New folder\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\RabbitMQ.GH.csproj",
+  "projectFilePath": "C:\\Users\\liors\\Desktop\\ICD\\02_Projects\\05_RabbitMQ\\RabbitMQ_Grasshopper\\RabbitMQ.GH\\RabbitMQ.GH\\RabbitMQ.GH.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\liors\\.nuget\\packages\\grasshopper\\7.13.21348.13001\\grasshopper.7.13.21348.13001.nupkg.sha512",
     "C:\\Users\\liors\\.nuget\\packages\\rabbitmq.client\\6.8.1\\rabbitmq.client.6.8.1.nupkg.sha512",
